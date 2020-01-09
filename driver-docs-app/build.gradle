@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.driver-docs'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile('org.junit.jupiter:junit-jupiter:5.4.2')
+
+    compile group: 'io.reactivex', name: 'rxjavafx', version: '2.0.2'
+    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.16'
+
+    runtime "com.h2database:h2:1.4.200"
+
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+}
+
+
+task copyJarsToLib(type: Copy) {
+    def toDir = "build/libs"
+
+    /*
+        // create directories, if not already done:
+        file(toDir).mkdirs()
+    */
+    // copy jars to lib folder:
+    from configurations.compile
+    into toDir
+}
+
+jar {
+    dependsOn(copyJarsToLib/*,copyFXML*/)
+    baseName = 'driver-docs'
+
+    from('src') {
+        include '**/*.fxml'
+        include '**/*.png'
+        include '**/*.xml'
+    }
+
+    manifest {
+        attributes(
+                'Implementation-Title': 'lis doctor module',
+                'Main-Class': 'ru.skysun.lis.doctor.App',
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' ')
+        )
+    }
+}
+
+task copy4Out(type: Copy) {
+
+    file('output/bin').mkdirs()
+
+    from 'build/libs'
+    into 'output/bin'
+    include '*.jar'
+}
+
+build.dependsOn(copy4Out)

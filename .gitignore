@@ -1,0 +1,12 @@
+/db/
+**/.gradle/
+**/.settings/
+**/build/
+**/gradle/
+**/output/
+**/out/
+**/gradlew
+**/gradlew.bat
+**/*.jar
+**/*.*~
+**/*.~*
