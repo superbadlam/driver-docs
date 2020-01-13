@@ -1,1 +1,5 @@
 /src/main/resources/logback-spring.xml
+/db-test/dd.odb
+/db-test/dd.trace.db
+/db/dd.mv.db
+/db-test/dd.mv.db

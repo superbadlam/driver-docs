@@ -2,6 +2,9 @@ plugins {
     id 'java'
 }
 
+//compileJava.options.encoding='windows-1251'
+//compileJava.options.encoding='UTF-8'
+
 group 'ru.driver-docs'
 
 sourceCompatibility = 1.8
@@ -15,10 +18,11 @@ dependencies {
 
     compile group: 'io.reactivex', name: 'rxjavafx', version: '2.0.2'
     compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.16'
+    compile group: 'com.github.davidmoten', name: 'rxjava2-jdbc', version: '0.2.6'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 
     runtime "com.h2database:h2:1.4.200"
-
-    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+//    runtime "com.h2database:h2:1.4.196"
 }
 
 
@@ -60,6 +64,13 @@ task copy4Out(type: Copy) {
     from 'build/libs'
     into 'output/bin'
     include '*.jar'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 build.dependsOn(copy4Out)

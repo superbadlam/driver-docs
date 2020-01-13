@@ -46,7 +46,6 @@ public final class MainController extends AbstractController {
             log.trace("font size changed from {} to {}", oldValue, newValue);
             mainView.setStyle(String.format("-fx-font-size: %dpt;", newValue));
         });
-
         lblToday.setText((new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
     }
 
