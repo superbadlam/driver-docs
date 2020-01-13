@@ -22,6 +22,59 @@ class DriverRepostoryImplTest {
 
 
     @Test
+    void update() {
+        final String lastname1 = "фамилия-100";
+        final String firstname1 = "имя-100";
+        final String secondname1 = "отчество-100";
+        final LocalDate birthdate1 = LocalDate.now().minusDays(1);
+
+        final String lastname2 = "фамилия-101";
+        final String firstname2 = "имя-101";
+        final String secondname2 = "отчество-101";
+        final LocalDate birthdate2 = LocalDate.now();
+
+
+        try (Database db = Database
+                .nonBlocking()
+                .user(user).password(password)
+                .url(url).maxPoolSize(maxPoolSize)
+                .build()) {
+
+            long key = db.update("insert into dd.driver(lastname,firstname,secondname,birthdate) values(?,?,?,?)")
+                    .parameterListStream(Flowable.just(Arrays.asList(lastname1, firstname1, secondname1, birthdate1)))
+                    .returnGeneratedKeys()
+                    .getAs(Long.class)
+                    .blockingSingle();
+
+            DriverRepostoryImpl repository = new DriverRepostoryImpl(db);
+            repository.update(key, lastname2, firstname2, secondname2, birthdate2).blockingAwait();
+
+
+            db.select("select d.lastname, d.firstname, d.secondname from dd.driver d where d.keyid=?")
+                    .parameters(key)
+                    .getAs(String.class, String.class, String.class)
+                    .blockingForEach(t -> {
+                        assertEquals(lastname2, t._1());
+                        assertEquals(firstname2, t._2());
+                        assertEquals(secondname2, t._3());
+                    });
+
+            Integer integer = db
+                    .update("delete from dd.driver where keyid=?")
+                    .parameter(key)
+                    .counts()
+                    .blockingSingle();
+            assertEquals(1, (int) integer);
+
+            //--------------------------------------------------------
+
+        } catch (Exception e) {
+            fail(e);
+        }
+    }
+
+
+    @Test
     void findAll() {
         final String prefixLastname = "фамилия-";
         final String prefixFirstname = "имя-";
@@ -62,18 +115,18 @@ class DriverRepostoryImplTest {
                     .toMap(Driver::getId)
                     .blockingGet();
 
-            keys.keySet().forEach(keyid->{
+            keys.keySet().forEach(keyid -> {
                 assertTrue(data.containsKey(keyid));
                 assertEquals(prefixLastname + keys.get(keyid).value2(), data.get(keyid).getLastname());
                 assertEquals(prefixFirstname + keys.get(keyid).value2(), data.get(keyid).getFirstname());
                 assertEquals(prefixSecondname + keys.get(keyid).value2(), data.get(keyid).getSecondname());
-                assertEquals( birthdate,  data.get(keyid).getBirthdate());
+                assertEquals(birthdate, data.get(keyid).getBirthdate());
             });
 
-            assertEquals(3,
-                db.update("delete from dd.driver where keyid in (?)")
-                  .parameters(keys.keySet())
-                  .counts().blockingSingle().intValue()
+            assertEquals(keys.size(),
+                    db.update("delete from dd.driver where keyid in (?)")
+                            .parameters(keys.keySet())
+                            .counts().blockingSingle().intValue()
             );
             //--------------------------------------------------------
 

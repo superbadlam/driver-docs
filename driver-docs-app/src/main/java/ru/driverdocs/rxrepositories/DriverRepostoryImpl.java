@@ -1,5 +1,6 @@
 package ru.driverdocs.rxrepositories;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import org.davidmoten.rx.jdbc.Database;
@@ -33,7 +34,7 @@ public class DriverRepostoryImpl implements DriverRepostory {
     public Single<Driver> create(String lastname, String firstname, String secondname, LocalDate birthdate) {
         return
                 db.update("insert into dd.driver(lastname,firstname,secondname,birthdate) values(?,?,?,?)")
-                        .parameterListStream(Flowable.just(Arrays.asList(lastname, firstname, secondname, birthdate)))
+                        .parameterListStream(Flowable.just(Arrays.asList(lastname, firstname, secondname, java.sql.Date.valueOf(birthdate))))
                         .returnGeneratedKeys()
                         .getAs(Long.class)
                         .doOnError(e -> log.warn("не удалось создать водителя", e))
@@ -71,5 +72,13 @@ public class DriverRepostoryImpl implements DriverRepostory {
                             .setSecondname(row.value4())
                             .setBirthdate(date2LocalDate(row.value5()))
                             .build());
+    }
+
+    @Override
+    public Completable update(long key, String lastname, String firstname, String secondname, LocalDate birthdate) {
+        return
+                db.update("update dd.driver set lastname=?, firstname=?, secondname=?, birthdate=? where keyid=?")
+                        .parameterListStream(Flowable.just(Arrays.asList(lastname, firstname, secondname,java.sql.Date.valueOf(birthdate),key)))
+                        .complete();
     }
 }
