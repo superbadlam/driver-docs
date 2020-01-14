@@ -14,7 +14,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DriverRepostoryImplTest {
+class DriverRepositoryImplTest {
 
     private final int maxPoolSize = 1;
     private final String url = "jdbc:h2:./db-test/dd";
@@ -56,7 +56,7 @@ class DriverRepostoryImplTest {
 
             long key = insertIntoDriver(lastname1, firstname1, secondname1, birthdate1, db);
 
-            DriverRepostoryImpl repository = new DriverRepostoryImpl(db);
+            DriverRepositoryImpl repository = new DriverRepositoryImpl(db);
             assertThrows(JdbcBatchUpdateException.class, () -> {
                 throw repository.update(key, lastname2, firstname2, secondname2, birthdate2).blockingGet();
             });
@@ -108,7 +108,7 @@ class DriverRepostoryImplTest {
 
             long key = insertIntoDriver(lastname1, firstname1, secondname1, birthdate1, db);
 
-            DriverRepostoryImpl repository = new DriverRepostoryImpl(db);
+            DriverRepositoryImpl repository = new DriverRepositoryImpl(db);
             repository.update(key, lastname2, firstname2, secondname2, birthdate2).blockingAwait();
 
 
@@ -167,7 +167,7 @@ class DriverRepostoryImplTest {
                     .toMap(Tuple2::value1)
                     .blockingGet();
 
-            DriverRepostoryImpl repository = new DriverRepostoryImpl(db);
+            DriverRepositoryImpl repository = new DriverRepositoryImpl(db);
             Map<Long, Driver> data = repository.findAll()
                     .toMap(Driver::getId)
                     .blockingGet();
@@ -228,7 +228,7 @@ class DriverRepostoryImplTest {
                 .maxPoolSize(maxPoolSize)
                 .build()) {
 
-            DriverRepostoryImpl repository = new DriverRepostoryImpl(db);
+            DriverRepositoryImpl repository = new DriverRepositoryImpl(db);
             assertThrows(RuntimeException.class, () -> repository.create(lastname, firstname, secondname, birthdate).blockingGet());
 
         } catch (Exception e) {
@@ -252,7 +252,7 @@ class DriverRepostoryImplTest {
                 .maxPoolSize(maxPoolSize)
                 .build()) {
 
-            DriverRepostoryImpl repostory = new DriverRepostoryImpl(db);
+            DriverRepositoryImpl repostory = new DriverRepositoryImpl(db);
             long driverId = repostory.create(lastname, firstname, secondname, birthdate).blockingGet();
             assertTrue(driverId > 0);
 
@@ -294,7 +294,7 @@ class DriverRepostoryImplTest {
             long keyid = insertIntoDriver(lastname, firstname, secondname, birthdate, db);
             assertTrue(keyid > 0);
 
-            DriverRepostoryImpl repostory = new DriverRepostoryImpl(db);
+            DriverRepositoryImpl repostory = new DriverRepositoryImpl(db);
             Boolean isDeleted = repostory.delete(keyid - 1).blockingGet();
             assertFalse(isDeleted);
 
@@ -322,7 +322,7 @@ class DriverRepostoryImplTest {
             long keyid = insertIntoDriver(lastname, firstname, secondname, birthdate, db);
             assertTrue(keyid > 0);
 
-            DriverRepostoryImpl repostory = new DriverRepostoryImpl(db);
+            DriverRepositoryImpl repostory = new DriverRepositoryImpl(db);
             Boolean isDeleted = repostory.delete(keyid).blockingGet();
             assertTrue(isDeleted);
 
