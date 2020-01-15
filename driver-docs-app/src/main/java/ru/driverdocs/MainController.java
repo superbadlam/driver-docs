@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.helpers.ui.AbstractController;
+import ru.driverdocs.helpers.ui.ErrorInformer2;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -18,8 +19,10 @@ import java.util.Date;
 
 public final class MainController extends AbstractController {
 
+    public static final String FXML_MAIN_VIEW = "/fxml/MainWnd.fxml";
     private static Logger log = LoggerFactory.getLogger(MainController.class);
-    private App app;
+    private final ErrorInformer2 errorInformer = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
+    //    private App app;
     @FXML
     private ChoiceBox<Integer> cbFontSizeList;
     @FXML
@@ -34,9 +37,14 @@ public final class MainController extends AbstractController {
     private TabPane tabPane;
 
 
-    private MainController(App app) {
+    private MainController() {
         super();
-        this.app = app;
+    }
+
+    public static MainController build() throws IOException {
+        MainController c = new MainController();
+        c.load(FXML_MAIN_VIEW);
+        return c;
     }
 
     @FXML
@@ -47,11 +55,12 @@ public final class MainController extends AbstractController {
             mainView.setStyle(String.format("-fx-font-size: %dpt;", newValue));
         });
         lblToday.setText((new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
-    }
 
-    public static MainController build(App app) throws IOException {
-		MainController c = new MainController(app);
-		c.load(App.FXML_MAIN_VIEW);
-		return c;
-	}
+        try {
+            tabRefBooks.setContent(DriverEitorController.build().getRootPane());
+        } catch (IOException e) {
+            log.error("не удалось отбразить закладки", e);
+            errorInformer.displayError("не удалось отбразить закладки", e);
+        }
+    }
 }

@@ -33,7 +33,8 @@ public abstract class AbstractController implements Controller {
             if (rootPane != null) {
                 loader.setRoot(rootPane);
                 loader.load(in);
-            } else rootPane = loader.load(in);
+            } else
+                rootPane = loader.load(in);
         }
     }
 

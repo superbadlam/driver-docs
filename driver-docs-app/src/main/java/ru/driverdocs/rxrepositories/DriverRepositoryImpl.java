@@ -14,14 +14,14 @@ import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
 
-public class DriverRepositoryImpl implements DriverRepository {
+public final class DriverRepositoryImpl implements DriverRepository {
 
     private static Logger log = LoggerFactory.getLogger(DriverRepositoryImpl.class);
-    private Database db;
+    private final Database db;
 
     public DriverRepositoryImpl(Database db) {
         if (db == null)
-            throw new NullPointerException("db can't be a null");
+            throw new NullPointerException("объект базы данных является обязательным");
         this.db = db;
     }
 
