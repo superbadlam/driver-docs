@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--        fx:controller="ru.driverdocs.DriverEitorController"-->
+<!--        fx:controller="ru.driverdocs.DriverEditorControllerr"-->
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
     <top>
         <VBox BorderPane.alignment="CENTER">
-            <HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="5.0">
                 <TextField fx:id="txtFirsname" promptText="фамилия"/>
                 <TextField fx:id="txtLastname" promptText="имя"/>
                 <TextField fx:id="txtSecondname" promptText="отчество"/>
-                <DatePicker fx:id="dtBitrhdate" promptText="дата рождения"/>
-            </HBox>
-            <HBox alignment="CENTER_RIGHT">
-                <Button fx:id="btnApply" mnemonicParsing="false" text="применить"/>
+                <DatePicker fx:id="dtBirthdate" promptText="дата рождения"/>
+                <Button fx:id="btnApply" mnemonicParsing="false" text="добавить"/>
+                <VBox.margin>
+                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                </VBox.margin>
             </HBox>
         </VBox>
     </top>
     <center>
-        <TableView fx:id="tblDrivers" BorderPane.alignment="CENTER">
+        <TableView fx:id="tblDrivers" editable="true" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1"/>
-                <TableColumn prefWidth="75.0" text="C2"/>
+                <TableColumn fx:id="colLastname" prefWidth="75.0" text="Фамилия"/>
+                <TableColumn fx:id="colFirstname" prefWidth="75.0" text="Имя"/>
+                <TableColumn fx:id="colSecondname" prefWidth="75.0" text="Отчество"/>
+                <TableColumn fx:id="colBirthdate" prefWidth="75.0" text="дата рождения"/>
+                <TableColumn fx:id="colDelete" prefWidth="75.0" text="удалить"/>
             </columns>
         </TableView>
     </center>

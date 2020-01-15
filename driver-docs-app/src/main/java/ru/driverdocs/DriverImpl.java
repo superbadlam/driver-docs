@@ -4,12 +4,20 @@ import ru.driverdocs.domain.Driver;
 
 import java.time.LocalDate;
 
-final class DriverImpl implements Driver {
+public class DriverImpl implements Driver {
     private long id;
     private String firstname;
     private String lastname;
     private String secondname;
     private LocalDate birthdate;
+
+    public DriverImpl(long id, String lastname, String firstname, String secondname, LocalDate birthdate) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.secondname = secondname;
+        this.birthdate = birthdate;
+    }
 
     @Override
     public long getId() {
