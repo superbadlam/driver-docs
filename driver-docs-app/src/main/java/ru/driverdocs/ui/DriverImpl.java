@@ -3,6 +3,7 @@ package ru.driverdocs.ui;
 import ru.driverdocs.domain.Driver;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DriverImpl implements Driver {
     private long id;
@@ -68,4 +69,8 @@ public class DriverImpl implements Driver {
         this.birthdate = birthdate;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s %s %s г.р.", firstname, lastname, secondname, birthdate.format(DateTimeFormatter.ofPattern("yyyy")));
+    }
 }

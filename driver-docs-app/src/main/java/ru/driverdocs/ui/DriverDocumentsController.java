@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import ru.driverdocs.DriverDocsSetting;
 import ru.driverdocs.helpers.ui.AbstractController;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
+import ru.driverdocs.rxrepositories.DriverRepository;
 
 import java.io.IOException;
 
@@ -17,6 +18,7 @@ public class DriverDocumentsController extends AbstractController {
     private static final String FXML_FILE = "/fxml/DriverDocumentsEditorView.fxml";
     private static Logger log = LoggerFactory.getLogger(DriverDocumentsController.class);
     private final ErrorInformer2 errorInformer = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
+    private final DriverRepository driverRepository = DriverDocsSetting.getInstance().getDriverRepository();
     @FXML
     private ComboBox<DriverImpl> cmbDrivers;
     @FXML
@@ -46,6 +48,15 @@ public class DriverDocumentsController extends AbstractController {
 
     @FXML
     private void initialize() {
-        System.out.println("skgjdflkgldfk lsdfgl");
+        cmbDrivers.getItems().addAll(driverRepository.findAll().map(DriverImpl::createOf).toList().blockingGet());
+
+        btnLicApply.disableProperty().bind(cmbDrivers.valueProperty().isNull());
+        btnRefApply.disableProperty().bind(cmbDrivers.valueProperty().isNull());
+
+        cmbDrivers.setOnAction(ev -> {
+            errorInformer.displayInfo(cmbDrivers.getValue().toString());
+            //TODO: найти вод.удостоверение по ID водителя
+            //TODO: найти мед.справку по ID водителя
+        });
     }
 }

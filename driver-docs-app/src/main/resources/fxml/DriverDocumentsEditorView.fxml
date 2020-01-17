@@ -13,7 +13,7 @@
                <Insets right="15.0"/>
             </HBox.margin>
          </Label>
-         <ComboBox fx:id="cmbDrivers" editable="true" prefWidth="350.0"/>
+         <ComboBox fx:id="cmbDrivers" prefWidth="350.0"/>
       </HBox>
    </top>
    <center>
