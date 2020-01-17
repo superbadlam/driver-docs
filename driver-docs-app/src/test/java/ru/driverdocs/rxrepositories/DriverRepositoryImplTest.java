@@ -295,8 +295,7 @@ class DriverRepositoryImplTest {
             assertTrue(keyid > 0);
 
             DriverRepositoryImpl repostory = new DriverRepositoryImpl(db);
-            Boolean isDeleted = repostory.delete(keyid - 1).blockingGet();
-            assertFalse(isDeleted);
+            repostory.delete(keyid - 1).blockingAwait();
 
         } catch (Exception e) {
             fail(e);
@@ -323,8 +322,7 @@ class DriverRepositoryImplTest {
             assertTrue(keyid > 0);
 
             DriverRepositoryImpl repostory = new DriverRepositoryImpl(db);
-            Boolean isDeleted = repostory.delete(keyid).blockingGet();
-            assertTrue(isDeleted);
+            repostory.delete(keyid - 1).blockingAwait();
 
         } catch (Exception e) {
             fail(e);

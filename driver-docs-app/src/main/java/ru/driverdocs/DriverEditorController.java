@@ -7,19 +7,24 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.helpers.ui.AbstractController;
+import ru.driverdocs.helpers.ui.ErrorInformer2;
+import ru.driverdocs.rxrepositories.DriverRepository;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class DriverEditorController extends AbstractController {
 
     private static final Logger log = LoggerFactory.getLogger(DriverEditorController.class);
     private static final String FXML_FILE = "/fxml/DriverEditorView.fxml";
-    private final String cssUrl = DriverDocsSetting.getInstance().getCssUrl();
+    private final DriverRepository repo = DriverDocsSetting.getInstance().getDriverRepository();
+    private final ErrorInformer2 errorInformer = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
+
     @FXML
     private TextField txtLastname;
     @FXML
-    private TextField txtFirsname;
+    private TextField txtFirstname;
     @FXML
     private TextField txtSecondname;
     @FXML
@@ -53,20 +58,39 @@ public class DriverEditorController extends AbstractController {
         setupSecondnameColumn();
         setupBirthdateColumn();
         setupButtonApply();
-
-        tblDrivers.getItems().add(new DriverImpl(1, "фамилия1", "имя1", "отчество1", LocalDate.now().minusDays(1)));
-        tblDrivers.getItems().add(new DriverImpl(2, "фамилия2", "имя2", "отчество2", LocalDate.now().minusDays(2)));
-        tblDrivers.getItems().add(new DriverImpl(3, "фамилия3", "имя3", "отчество3", LocalDate.now().minusDays(3)));
     }
 
     private void setupButtonApply() {
         btnApply.setOnAction(ev -> {
-            log.info("добавим нового водителя: lastname={}, firstname={}, secondname={}, bithdate={}", txtLastname.getText(), txtFirsname.getText(), txtSecondname.getText(), dtBirthdate.getValue());
-            tblDrivers.getItems().add(new DriverImpl(4, txtLastname.getText(), txtFirsname.getText(), txtSecondname.getText(), dtBirthdate.getValue()));
-            txtLastname.setText("");
-            txtFirsname.setText("");
-            txtSecondname.setText("");
-            dtBirthdate.setValue(null);
+            try {
+                log.trace("добавим нового водителя: lastname='{}', firstname='{}', secondname='{}', birthdate='{}'", txtLastname.getText(), txtFirstname.getText(), txtSecondname.getText(), dtBirthdate.getValue());
+
+                String lastname = txtLastname.getText().trim();
+                String firstname = txtFirstname.getText().trim();
+                String secondname = txtSecondname.getText().trim();
+                LocalDate birthdate = dtBirthdate.getValue();
+
+                if (txtLastname.getText().trim().isEmpty())
+                    throw new IllegalArgumentException("необходимо указать фамилию");
+
+                if (txtFirstname.getText().trim().isEmpty())
+                    throw new IllegalArgumentException("необходимо указать имя");
+
+                if (dtBirthdate.getValue() == null)
+                    throw new IllegalArgumentException("необходимо указать дату рождения");
+
+
+                long d = repo.create(lastname, firstname, secondname, birthdate).blockingGet();
+                tblDrivers.getItems().add(new DriverImpl(d, lastname, firstname, secondname, birthdate));
+
+                txtLastname.setText("");
+                txtFirstname.setText("");
+                txtSecondname.setText("");
+                dtBirthdate.setValue(null);
+
+            } catch (Exception e) {
+                errorInformer.displayError("не удалось добавить водителя", e);
+            }
         });
     }
 
@@ -83,14 +107,22 @@ public class DriverEditorController extends AbstractController {
         colBirthdate.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
 
         colDelete.setCellFactory(col -> new ActionColumn());
+
+        List<DriverImpl> drivers = repo.findAll().map(DriverImpl::createOf).toList().blockingGet();
+        tblDrivers.getItems().addAll(drivers);
     }
 
     private void setupLastnameColumn() {
         colLastname.setCellFactory(TextFieldTableCell.forTableColumn());
         colLastname.setOnEditCommit((TableColumn.CellEditEvent<DriverImpl, String> t) -> {
-            DriverImpl d = t.getTableView().getItems().get(t.getTablePosition().getRow());
-            log.info("обновим фамилию водителя: driver-id={}, old-lastname={}, new-lastname={}", d.getId(), t.getOldValue(), t.getNewValue());
-            d.setLastname(t.getNewValue());
+            try {
+                DriverImpl d = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                log.trace("обновим фамилию водителя: driver-id={}, old-lastname={}, new-lastname={}", d.getId(), t.getOldValue(), t.getNewValue());
+                repo.updateLastname(d.getId(), t.getNewValue()).blockingAwait();
+                d.setLastname(t.getNewValue());
+            } catch (Exception e) {
+                errorInformer.displayError("не удалось обновить фамилию водителя", e);
+            }
         });
 
     }
@@ -98,38 +130,59 @@ public class DriverEditorController extends AbstractController {
     private void setupFirstnameColumn() {
         colFirstname.setCellFactory(TextFieldTableCell.forTableColumn());
         colFirstname.setOnEditCommit((TableColumn.CellEditEvent<DriverImpl, String> t) -> {
-            DriverImpl d = t.getTableView().getItems().get(t.getTablePosition().getRow());
-            log.info("обновим имя водителя: driver-id={}, old-firstname={}, new-firstname={}", d.getId(), t.getOldValue(), t.getNewValue());
-            d.setFirstname(t.getNewValue());
+            try {
+                DriverImpl d = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                log.trace("обновим имя водителя: driver-id={}, old-firstname={}, new-firstname={}", d.getId(), t.getOldValue(), t.getNewValue());
+                repo.updateFirstname(d.getId(), t.getNewValue()).blockingAwait();
+                d.setFirstname(t.getNewValue());
+            } catch (Exception e) {
+                errorInformer.displayError("не удалось обновить имя водителя", e);
+            }
         });
     }
 
     private void setupSecondnameColumn() {
         colSecondname.setCellFactory(TextFieldTableCell.forTableColumn());
         colSecondname.setOnEditCommit((TableColumn.CellEditEvent<DriverImpl, String> t) -> {
-            DriverImpl d = t.getTableView().getItems().get(t.getTablePosition().getRow());
-            log.info("обновим отчество водителя: driver-id={}, old-secondname={}, new-secondname={}", d.getId(), t.getOldValue(), t.getNewValue());
-            d.setSecondname(t.getNewValue());
+            try {
+                DriverImpl d = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                log.trace("обновим отчество водителя: driver-id={}, old-secondname={}, new-secondname={}", d.getId(), t.getOldValue(), t.getNewValue());
+                repo.updateSecondname(d.getId(), t.getNewValue()).blockingAwait();
+                d.setSecondname(t.getNewValue());
+            } catch (Exception e) {
+                errorInformer.displayError("не удалось обновить отчество водителя", e);
+            }
         });
     }
 
     private void setupBirthdateColumn() {
         colBirthdate.setCellFactory(param -> new DatePickerCell<>());
         colBirthdate.setOnEditCommit((TableColumn.CellEditEvent<DriverImpl, LocalDate> t) -> {
-            DriverImpl d = t.getTableView().getItems().get(t.getTablePosition().getRow());
-            log.info("обновим дату рождения водителя: driver-id={}, old-birthdate={}, new-birthdate={}", d.getId(), t.getOldValue(), t.getNewValue());
-            d.setBirthdate(t.getNewValue());
+            try {
+                DriverImpl d = t.getTableView().getItems().get(t.getTablePosition().getRow());
+                log.trace("обновим дату рождения водителя: driver-id={}, old-birthdate={}, new-birthdate={}", d.getId(), t.getOldValue(), t.getNewValue());
+                repo.updateBirthdate(d.getId(), t.getNewValue()).blockingAwait();
+                d.setBirthdate(t.getNewValue());
+            } catch (Exception e) {
+                errorInformer.displayError("не удалось обновить дату рождения водителя", e);
+            }
         });
     }
 
-    private static class ActionColumn extends TableCell<DriverImpl, String> {
+    private class ActionColumn extends TableCell<DriverImpl, String> {
         Button btn = new Button("удалить");
 
         public ActionColumn() {
             btn.setOnAction(ev -> {
-                DriverImpl driver = getTableView().getItems().get(getTableRow().getIndex());
-                log.trace("удалим водителя: id={}, lastname={},firstname={}, secondname={}", driver.getId(), driver.getLastname(), driver.getFirstname(), driver.getSecondname());
-                getTableView().getItems().remove(getTableRow().getIndex());
+                try {
+                    DriverImpl driver = getTableView().getItems().get(getTableRow().getIndex());
+                    log.trace("удалим водителя: id={}, lastname={},firstname={}, secondname={}", driver.getId(), driver.getLastname(), driver.getFirstname(), driver.getSecondname());
+                    repo.delete(driver.getId()).blockingAwait();
+                    tblDrivers.getItems().remove(getTableRow().getIndex());
+                } catch (Exception e) {
+                    errorInformer.displayError("не удалось удалить водителя", e);
+                }
+
             });
         }
 

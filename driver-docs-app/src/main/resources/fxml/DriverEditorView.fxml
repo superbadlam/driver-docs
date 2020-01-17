@@ -9,8 +9,8 @@
     <top>
         <VBox BorderPane.alignment="CENTER">
             <HBox alignment="CENTER_RIGHT" spacing="5.0">
-                <TextField fx:id="txtFirsname" promptText="фамилия"/>
-                <TextField fx:id="txtLastname" promptText="имя"/>
+                <TextField fx:id="txtLastname" promptText="фамилия"/>
+                <TextField fx:id="txtFirstname" promptText="имя"/>
                 <TextField fx:id="txtSecondname" promptText="отчество"/>
                 <DatePicker fx:id="dtBirthdate" promptText="дата рождения"/>
                 <Button fx:id="btnApply" mnemonicParsing="false" text="добавить"/>

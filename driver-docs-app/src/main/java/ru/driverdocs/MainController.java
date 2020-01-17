@@ -57,7 +57,9 @@ public final class MainController extends AbstractController {
         lblToday.setText((new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
 
         try {
-            tabRefBooks.setContent(DriverEditorController.build().getRootPane());
+            DriverEditorController driverEditorController = DriverEditorController.build();
+
+            tabRefBooks.setContent(driverEditorController.getRootPane());
         } catch (IOException e) {
             log.error("не удалось отбразить закладки", e);
             errorInformer.displayError("не удалось отбразить закладки", e);

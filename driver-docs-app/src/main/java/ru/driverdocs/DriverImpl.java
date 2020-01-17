@@ -19,6 +19,10 @@ public class DriverImpl implements Driver {
         this.birthdate = birthdate;
     }
 
+    public static DriverImpl createOf(Driver driver) {
+        return new DriverImpl(driver.getId(), driver.getLastname(), driver.getFirstname(), driver.getSecondname(), driver.getBirthdate());
+    }
+
     @Override
     public long getId() {
         return id;
@@ -63,4 +67,5 @@ public class DriverImpl implements Driver {
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
+
 }

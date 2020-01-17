@@ -52,15 +52,13 @@ public final class DriverRepositoryImpl implements DriverRepository {
     }
 
     @Override
-    public Single<Boolean> delete(long driverId) {
+    public Completable delete(long driverId) {
         log.trace("выполним удаление водителя с id={}", driverId);
         return
                 db.update("delete from dd.driver where keyid=?")
                         .parameter(driverId)
-                        .counts()
-                        .singleOrError()
-                        .doOnError(key -> log.warn("не удалось удалить водителя: id=" + driverId, key))
-                        .map(key -> key > 0);
+                        .complete()
+                        .doOnError(key -> log.warn("не удалось удалить водителя: id=" + driverId, key));
     }
 
     @Override
@@ -94,6 +92,73 @@ public final class DriverRepositoryImpl implements DriverRepository {
                                         String.format(
                                                 "не удалось обновить водителя с id=%d: new-lastname=%s, new-firstname=%s, new-secondname=%s, new-birthdate=%s",
                                                 key, lastname, firstname, secondname, birthdate), e)
+                        );
+    }
+
+    @Override
+    public Completable updateBirthdate(long key, LocalDate birthdate) {
+
+        log.info("выполним обновление даты рождения водителя с id={}: new-birthdate={}",
+                key, birthdate);
+
+        java.sql.Date bd = birthdate == null ? null : java.sql.Date.valueOf(birthdate);
+        return
+                db.update("update dd.driver set birthdate=? where keyid=?")
+                        .parameterListStream(Flowable.just(Arrays.asList(bd, key)))
+                        .complete()
+                        .doOnError(e ->
+                                log.warn(
+                                        String.format(
+                                                "не удалось обновить дату рождения водителя с id=%d: new-birthdate=%s",
+                                                key, birthdate), e)
+                        );
+    }
+
+    @Override
+    public Completable updateSecondname(long key, String secondname) {
+
+        log.info("выполним обновление отчества водителя с id={}: new-secondname={}", key, secondname);
+
+        return
+                db.update("update dd.driver set secondname=? where keyid=?")
+                        .parameterListStream(Flowable.just(Arrays.asList(secondname, key)))
+                        .complete()
+                        .doOnError(e ->
+                                log.warn(
+                                        String.format(
+                                                "не удалось обновить отчество водителя с id=%d: new-secondname=%s", key, secondname), e)
+                        );
+    }
+
+    @Override
+    public Completable updateLastname(long key, String lastname) {
+
+        log.info("выполним обновление фамилии водителя с id={}: new-lastname={}", key, lastname);
+
+        return
+                db.update("update dd.driver set lastname=? where keyid=?")
+                        .parameterListStream(Flowable.just(Arrays.asList(lastname, key)))
+                        .complete()
+                        .doOnError(e ->
+                                log.warn(
+                                        String.format(
+                                                "не удалось обновить фамилию водителя с id=%d: new-lastname=%s", key, lastname), e)
+                        );
+    }
+
+    @Override
+    public Completable updateFirstname(long key, String firstname) {
+
+        log.info("выполним обновление имени водителя с id={}: new-lastname={}", key, firstname);
+
+        return
+                db.update("update dd.driver set firstname=? where keyid=?")
+                        .parameterListStream(Flowable.just(Arrays.asList(firstname, key)))
+                        .complete()
+                        .doOnError(e ->
+                                log.warn(
+                                        String.format(
+                                                "не удалось обновить имz водителя с id=%d: new-lastname=%s", key, firstname), e)
                         );
     }
 }

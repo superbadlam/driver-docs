@@ -46,6 +46,7 @@ public class App extends ApplicationEx2 {
         db.close();
         closeListeners.forEach(ApplicationCloseHandler::performCleanup);
         log.info("закрыли приложение");
+        System.exit(0);
     }
 
     private void showMainWnd() {
