@@ -22,7 +22,6 @@ public class DatePickerCell<S> extends TableCell<S, LocalDate> {
 
         datePicker.setOnAction(t -> {
             LocalDate date = datePicker.getValue();
-            int index = getIndex();
             setText(formatter.format(date));
             commitEdit(date);
         });
@@ -40,15 +39,10 @@ public class DatePickerCell<S> extends TableCell<S, LocalDate> {
             setText(null);
             setGraphic(null);
         } else {
-
-            if (isEditing()) {
-                setContentDisplay(ContentDisplay.TEXT_ONLY);
-            } else {
-                datePicker.setValue(item);
-                setText(formatter.format(item));
-                setGraphic(this.datePicker);
-                setContentDisplay(ContentDisplay.TEXT_ONLY);
-            }
+            datePicker.setValue(item);
+            setText(formatter.format(item));
+            setGraphic(this.datePicker);
+            setContentDisplay(ContentDisplay.TEXT_ONLY);
         }
     }
 
