@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--fx:controller="fxml.DriverDocuments"-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+   <top>
+      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+         <Label text="укажите водителя">
+            <HBox.margin>
+               <Insets right="15.0"/>
+            </HBox.margin>
+         </Label>
+         <ComboBox fx:id="cmbDrivers" editable="true" prefWidth="350.0"/>
+      </HBox>
+   </top>
+   <center>
+      <Accordion BorderPane.alignment="CENTER">
+         <panes>
+            <TitledPane animated="false" text="Водительское удостоверение">
+               <VBox spacing="10.0">
+                  <HBox>
+                     <TextField fx:id="txtLicSeries" promptText="серия"/>
+                     <TextField fx:id="txtLicNumber" promptText="номер"/>
+                     <DatePicker fx:id="dtLicStart" promptText="дата начала"/>
+                     <DatePicker fx:id="dtLicEnd" promptText="дата окончания"/>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT">
+                     <Button fx:id="btnLicApply" mnemonicParsing="false" text="применить"/>
+                  </HBox>
+               </VBox>
+            </TitledPane>
+            <TitledPane animated="false" text="Медицинская справка">
+               <VBox spacing="10.0">
+                  <HBox>
+                     <TextField fx:id="txtRefSeries" promptText="серия"/>
+                     <TextField fx:id="txtRefNumber" promptText="номер"/>
+                     <DatePicker fx:id="dtRefStart" promptText="дата начала"/>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT">
+                     <Button fx:id="btnRefApply" mnemonicParsing="false" text="применить"/>
+                  </HBox>
+               </VBox>
+            </TitledPane>
+         </panes>
+      </Accordion>
+   </center>
+</BorderPane>

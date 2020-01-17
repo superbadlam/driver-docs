@@ -1,4 +1,4 @@
-package ru.driverdocs;
+package ru.driverdocs.ui;
 
 
 import javafx.fxml.FXML;
@@ -9,6 +9,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.driverdocs.DriverDocsSetting;
 import ru.driverdocs.helpers.ui.AbstractController;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
 
@@ -30,7 +31,9 @@ public final class MainController extends AbstractController {
     @FXML
     private Label lblToday;
     @FXML
-    private Tab tabRefBooks;
+    private Tab tabDrivers;
+    @FXML
+    private Tab tabDriverCard;
     @FXML
     private Tab tabReports;
     @FXML
@@ -57,9 +60,9 @@ public final class MainController extends AbstractController {
         lblToday.setText((new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
 
         try {
-            DriverEditorController driverEditorController = DriverEditorController.build();
-
-            tabRefBooks.setContent(driverEditorController.getRootPane());
+            tabDrivers.setContent(DriverEditorController.build().getRootPane());
+            tabDriverCard.setContent(DriverDocumentsController.build().getRootPane());
+            tabPane.getSelectionModel().select(tabDriverCard);
         } catch (IOException e) {
             log.error("не удалось отбразить закладки", e);
             errorInformer.displayError("не удалось отбразить закладки", e);

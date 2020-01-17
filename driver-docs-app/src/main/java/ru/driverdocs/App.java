@@ -11,6 +11,7 @@ import ru.driverdocs.helpers.ui.ApplicationCloseHandler;
 import ru.driverdocs.helpers.ui.ApplicationEx2;
 import ru.driverdocs.helpers.ui.Controller;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
+import ru.driverdocs.ui.MainController;
 
 public class App extends ApplicationEx2 {
     public static final String IMG_APP_ICON = "/png/app.png";

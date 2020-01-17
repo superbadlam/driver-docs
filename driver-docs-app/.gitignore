@@ -3,3 +3,5 @@
 /db-test/dd.trace.db
 /db/dd.mv.db
 /db-test/dd.mv.db
+/db/dd.odb
+/db/dd.trace.db

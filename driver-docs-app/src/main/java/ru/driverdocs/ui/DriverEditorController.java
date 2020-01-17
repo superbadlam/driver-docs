@@ -1,4 +1,4 @@
-package ru.driverdocs;
+package ru.driverdocs.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -6,6 +6,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.driverdocs.DriverDocsSetting;
 import ru.driverdocs.helpers.ui.AbstractController;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
 import ru.driverdocs.rxrepositories.DriverRepository;

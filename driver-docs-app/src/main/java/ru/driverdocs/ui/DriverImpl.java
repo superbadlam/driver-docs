@@ -1,4 +1,4 @@
-package ru.driverdocs;
+package ru.driverdocs.ui;
 
 import ru.driverdocs.domain.Driver;
 

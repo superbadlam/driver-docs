@@ -9,7 +9,7 @@ import ru.driverdocs.rxrepositories.DriverRepositoryImpl;
 import java.io.File;
 import java.net.MalformedURLException;
 
-class DriverDocsSetting {
+public class DriverDocsSetting {
     private static final String SKIN_CSS = "cfg/skin.css";
     private static Logger log = LoggerFactory.getLogger(App.class);
     private static DriverDocsSetting instance;
