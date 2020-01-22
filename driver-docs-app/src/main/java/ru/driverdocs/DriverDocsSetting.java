@@ -3,6 +3,8 @@ package ru.driverdocs;
 import org.davidmoten.rx.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.driverdocs.rxrepositories.DriverLicenseRepository;
+import ru.driverdocs.rxrepositories.DriverLicenseRepositoryImpl;
 import ru.driverdocs.rxrepositories.DriverRepository;
 import ru.driverdocs.rxrepositories.DriverRepositoryImpl;
 
@@ -16,12 +18,14 @@ public class DriverDocsSetting {
     private final Database db;
     private final String cssUrl;
     private final DriverRepository driverRepository;
+    private final DriverLicenseRepository driverLicenseRepository;
 
     private DriverDocsSetting() {
         db = buildDataBase();
         cssUrl = loadCSS();
 
         driverRepository = new DriverRepositoryImpl(db);
+        driverLicenseRepository = new DriverLicenseRepositoryImpl(db);
     }
 
     public static DriverDocsSetting getInstance() {
@@ -61,7 +65,7 @@ public class DriverDocsSetting {
         return skinUrl;
     }
 
-    public Database getDatabase() {
+    Database getDatabase() {
         return db;
     }
 
@@ -71,5 +75,9 @@ public class DriverDocsSetting {
 
     public DriverRepository getDriverRepository() {
         return driverRepository;
+    }
+
+    public DriverLicenseRepository getDriverLicenseRepository() {
+        return driverLicenseRepository;
     }
 }

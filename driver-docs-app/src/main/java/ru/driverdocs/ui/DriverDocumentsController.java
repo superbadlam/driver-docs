@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import ru.driverdocs.DriverDocsSetting;
 import ru.driverdocs.helpers.ui.AbstractController;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
+import ru.driverdocs.rxrepositories.DriverLicenseRepository;
 import ru.driverdocs.rxrepositories.DriverRepository;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class DriverDocumentsController extends AbstractController {
     private static Logger log = LoggerFactory.getLogger(DriverDocumentsController.class);
     private final ErrorInformer2 errorInformer = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
     private final DriverRepository driverRepository = DriverDocsSetting.getInstance().getDriverRepository();
+    private final DriverLicenseRepository driverLicenseRepository = DriverDocsSetting.getInstance().getDriverLicenseRepository();
     @FXML
     private ComboBox<DriverImpl> cmbDrivers;
     @FXML
@@ -52,6 +54,15 @@ public class DriverDocumentsController extends AbstractController {
 
         btnLicApply.disableProperty().bind(cmbDrivers.valueProperty().isNull());
         btnRefApply.disableProperty().bind(cmbDrivers.valueProperty().isNull());
+
+        btnLicApply.setOnAction(ev -> {
+            //TODO: проверим для тек. водителя удостоверение в БД. Если нет, то создадим новое иначе обновляем
+        });
+
+        // сделать проперти currDriver, currLicense, currMedRef
+        // забиндить currDriver на cmbDrivers.value
+        // при изменении currDriver вытягивать из БД currLicense, currMedRef
+
 
         cmbDrivers.setOnAction(ev -> {
             errorInformer.displayInfo(cmbDrivers.getValue().toString());

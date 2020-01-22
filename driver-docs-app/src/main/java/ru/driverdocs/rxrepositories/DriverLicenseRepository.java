@@ -7,7 +7,7 @@ import ru.driverdocs.domain.DriverLicense;
 import java.time.LocalDate;
 
 public interface DriverLicenseRepository {
-    Single<Long> create(String series, String number, LocalDate startdate);
+    Single<Long> create(long driverId, String series, String number, LocalDate startdate, LocalDate enddate);
 
     Completable delete(long licenseId);
 

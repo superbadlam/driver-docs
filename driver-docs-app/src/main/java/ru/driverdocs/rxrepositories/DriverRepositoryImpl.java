@@ -8,11 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.domain.Driver;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
+
+import static ru.driverdocs.helpers.ConvUtils.date2LocalDate;
+import static ru.driverdocs.helpers.ConvUtils.toSqlDate;
 
 public final class DriverRepositoryImpl implements DriverRepository {
 
@@ -25,18 +26,14 @@ public final class DriverRepositoryImpl implements DriverRepository {
         this.db = db;
     }
 
-    private LocalDate date2LocalDate(Date date) {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        Instant instant = date.toInstant();
-        return instant.atZone(defaultZoneId).toLocalDate();
-    }
+
 
     @Override
     public Single<Long> create(String lastname, String firstname, String secondname, LocalDate birthdate) {
 
         log.trace("выполним создание водителя: lastname={}, firstname={}, secondname={}, birthdate={}", lastname, firstname, secondname, birthdate);
 
-        java.sql.Date bd = birthdate == null ? null : java.sql.Date.valueOf(birthdate);
+        java.sql.Date bd = toSqlDate(birthdate);
         return
                 db.update("insert into dd.driver(lastname,firstname,secondname,birthdate) values(?,?,?,?)")
                         .parameterListStream(Flowable.just(Arrays.asList(lastname, firstname, secondname, bd)))
@@ -50,6 +47,7 @@ public final class DriverRepositoryImpl implements DriverRepository {
                         )
                         .singleOrError();
     }
+
 
     @Override
     public Completable delete(long driverId) {
@@ -82,7 +80,7 @@ public final class DriverRepositoryImpl implements DriverRepository {
         log.info("выполним обновление водителя с id={}: new-lastname={}, new-firstname={}, new-secondname={}, new-birthdate={}",
                 key, lastname, firstname, secondname, birthdate);
 
-        java.sql.Date bd = birthdate == null ? null : java.sql.Date.valueOf(birthdate);
+        java.sql.Date bd = toSqlDate(birthdate);
         return
                 db.update("update dd.driver set lastname=?, firstname=?, secondname=?, birthdate=? where keyid=?")
                         .parameterListStream(Flowable.just(Arrays.asList(lastname, firstname, secondname, bd, key)))
@@ -101,7 +99,7 @@ public final class DriverRepositoryImpl implements DriverRepository {
         log.info("выполним обновление даты рождения водителя с id={}: new-birthdate={}",
                 key, birthdate);
 
-        java.sql.Date bd = birthdate == null ? null : java.sql.Date.valueOf(birthdate);
+        java.sql.Date bd = toSqlDate(birthdate);
         return
                 db.update("update dd.driver set birthdate=? where keyid=?")
                         .parameterListStream(Flowable.just(Arrays.asList(bd, key)))
