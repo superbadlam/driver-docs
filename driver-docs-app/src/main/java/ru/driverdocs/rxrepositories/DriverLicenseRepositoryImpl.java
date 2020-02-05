@@ -33,14 +33,15 @@ public final class DriverLicenseRepositoryImpl implements DriverLicenseRepositor
         java.sql.Date sdate = toSqlDate(startdate);
         java.sql.Date edate = toSqlDate(enddate);
         return
-                db.update("insert into dd.driver_license(keyid, license_series,license_number,startdate,enddate) values(?,?,?,?)")
+                db.update("insert into dd.driver_license(driver_id, license_series,license_number,startdate,enddate) " +
+                        "values(?,?,?,?,?)")
                         .parameterListStream(Flowable.just(Arrays.asList(driverId, series, number, sdate, edate)))
                         .returnGeneratedKeys()
                         .getAs(Long.class)
                         .doOnError(e ->
                                 log.warn(
                                         String.format(
-                                                "водительского удостоверения: driverId=%d, series=%s, number=%s, startdate=%s, enddate=%s",
+                                                "не удалось создать водительское удостоверение: driverId=%d, series=%s, number=%s, startdate=%s, enddate=%s",
                                                 driverId, series, number, startdate, enddate), e)
                         )
                         .singleOrError();
@@ -147,6 +148,27 @@ public final class DriverLicenseRepositoryImpl implements DriverLicenseRepositor
                                         String.format(
                                                 "не удалось обновить номер водительского удостоверения: license-id=%d: new-number=%s"
                                                 , key, number), e)
+                        );
+    }
+
+    @Override
+    public Completable update(long id, String series, String number, LocalDate startdate, LocalDate enddate) {
+
+        log.trace("выполним обновление водительского удостоверения: id={}, series={}, number={}, startdate={}, enddate={}",
+                id, series, number, startdate, enddate);
+
+        java.sql.Date sdate = toSqlDate(startdate);
+        java.sql.Date edate = toSqlDate(enddate);
+        return
+                db.update("update dd.driver_license set license_series=?, license_number=?, startdate=?, enddate=? where keyid=?")
+                        .parameterListStream(Flowable.just(Arrays.asList(series, number, startdate, enddate, id)))
+                        .complete()
+                        .doOnError(e ->
+                                log.warn(
+                                        String.format(
+                                                "не удалось обновить водительское удостоверение: " +
+                                                        "id=%d, new-series=%s, new-number=%s, new-startdate=%s, new-enddate=%s",
+                                                id, series, number, startdate, enddate), e)
                         );
     }
 }
