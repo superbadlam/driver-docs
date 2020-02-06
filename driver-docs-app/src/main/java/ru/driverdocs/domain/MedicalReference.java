@@ -7,5 +7,4 @@ public interface MedicalReference {
     String getSeries();
     String getNumber();
     LocalDate getStartdate();
-    Driver getDriver();
 }
