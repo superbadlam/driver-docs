@@ -161,7 +161,7 @@ public final class DriverLicenseRepositoryImpl implements DriverLicenseRepositor
         java.sql.Date edate = toSqlDate(enddate);
         return
                 db.update("update dd.driver_license set license_series=?, license_number=?, startdate=?, enddate=? where keyid=?")
-                        .parameterListStream(Flowable.just(Arrays.asList(series, number, startdate, enddate, id)))
+                        .parameterListStream(Flowable.just(Arrays.asList(series, number, sdate, edate, id)))
                         .complete()
                         .doOnError(e ->
                                 log.warn(

@@ -1,4 +1,4 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.ui;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

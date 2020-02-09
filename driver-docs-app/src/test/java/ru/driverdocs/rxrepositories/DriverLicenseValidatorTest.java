@@ -1,6 +1,7 @@
 package ru.driverdocs.rxrepositories;
 
 import org.junit.jupiter.api.Test;
+import ru.driverdocs.ui.DriverLicenseValidator;
 
 import java.time.LocalDate;
 

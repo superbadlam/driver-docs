@@ -21,5 +21,5 @@ public interface DriverLicenseRepository {
 
     Completable updateNumber(long key, String number);
 
-    Completable update(long driverId, String series, String number, LocalDate startdate, LocalDate enddate);
+    Completable update(long id, String series, String number, LocalDate startdate, LocalDate enddate);
 }

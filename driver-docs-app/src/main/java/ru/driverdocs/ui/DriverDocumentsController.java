@@ -17,8 +17,8 @@ import ru.driverdocs.domain.MedicalReference;
 import ru.driverdocs.helpers.ui.AbstractController;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
 import ru.driverdocs.rxrepositories.DriverLicenseRepository;
-import ru.driverdocs.rxrepositories.DriverLicenseValidator;
 import ru.driverdocs.rxrepositories.DriverRepository;
+import ru.driverdocs.rxrepositories.MedicalRefRepository;
 
 import java.io.IOException;
 
@@ -28,6 +28,7 @@ public class DriverDocumentsController extends AbstractController {
     private final ErrorInformer2 errorInformer = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
     private final DriverRepository driverRepository = DriverDocsSetting.getInstance().getDriverRepository();
     private final DriverLicenseRepository driverLicenseRepository = DriverDocsSetting.getInstance().getDriverLicenseRepository();
+    private final MedicalRefRepository medicalRefRepository = DriverDocsSetting.getInstance().getMedicalRefRepository();
     @FXML
     private ComboBox<DriverImpl> cmbDrivers;
     @FXML
@@ -79,11 +80,11 @@ public class DriverDocumentsController extends AbstractController {
                                 currLicense.getStartdate(), currLicense.getEnddate())
                                 .blockingGet()
                 );
-                log.info("создали новое вод. удостоверение: driver={} license={}", currDriver.get(), currLicense.toString());
+                log.info("создали новое вод. удостоверение: driver={}, license={}", currDriver.get(), currLicense.toString());
             } else {
                 driverLicenseRepository.update(currLicense.getId(), currLicense.getSeries(), currLicense.getNumber(),
                         currLicense.getStartdate(), currLicense.getEnddate()).blockingAwait();
-                log.info("обновили вод. удостоверение: driver={} license={}", currDriver.get(), currLicense.toString());
+                log.info("обновили вод. удостоверение: driver={}, license={}", currDriver.get(), currLicense.toString());
             }
         }
 
@@ -95,17 +96,50 @@ public class DriverDocumentsController extends AbstractController {
         findReference();
     };
     private EventHandler<ActionEvent> referenceApplyAction = actionEvent -> {
-        //TODO проверить currReference
-        if (currReference.getId() == 0) {
-            //TODO create new medical reference
+        if (!MedicalRefValidator.isValidSeries(currReference.getSeries())) {
+            log.warn("мед. справка имеет не корректную серию: series={}", currReference.getSeries());
+            errorInformer.displayWarning("серия имеет некорректное значение!");
+            currReference.setSeries("");
+        } else if (!MedicalRefValidator.isValidNumber(currReference.getNumber())) {
+            log.warn("мед. справка имеет не корректный номер: number={}", currReference.getNumber());
+            errorInformer.displayWarning("номер имеет некорректное значение!");
+            currReference.setNumber("");
+        } else if (!MedicalRefValidator.isValidDateRange(currReference.getStartdate())) {
+            log.warn("мед. справка имеет не корректную дату выдачи: series={}", currReference.getSeries());
+            errorInformer.displayWarning(" дата выдачи некорректное значение!");
+            currReference.setStartdate(null);
         } else {
-            //TODO update current medical refernce
+            if (currReference.getId() == 0) {
+                currReference.setId(
+                        medicalRefRepository.create(
+                                currDriver.get().getId(),
+                                currReference.getSeries(),
+                                currReference.getNumber(),
+                                currReference.getStartdate()
+                        ).blockingGet());
+                log.info("создали новую мед. справку: driver={}, medicalRef={}", currDriver.get(), currReference.toString());
+            } else {
+                medicalRefRepository
+                        .update(
+                                currReference.getId(),
+                                currReference.getSeries(),
+                                currReference.getNumber(),
+                                currReference.getStartdate())
+                        .blockingAwait();
+                log.info("обновили мед. справку: driver={}, medicalRef={}", currDriver.get(), currReference.toString());
+            }
         }
     };
 
+    public static DriverDocumentsController build() throws IOException {
+        DriverDocumentsController c = new DriverDocumentsController();
+        c.load(FXML_FILE);
+        return c;
+    }
+
     private void findReference() {
         try {
-            MedicalReference reference = null;// TODO: найти мед. справку по ид водителя
+            MedicalReference reference = medicalRefRepository.findByDriverId(currDriver.get().getId()).blockingGet();
             currReference.setId(reference.getId());
             currReference.setSeries(reference.getSeries());
             currReference.setNumber(reference.getNumber());
@@ -137,13 +171,6 @@ public class DriverDocumentsController extends AbstractController {
             currLicense.setEnddate(null);
             log.warn("не удалось найти удостоверение для водителя: driver={}", currDriver.get());
         }
-    }
-
-
-    public static DriverDocumentsController build() throws IOException {
-        DriverDocumentsController c = new DriverDocumentsController();
-        c.load(FXML_FILE);
-        return c;
     }
 
     @FXML

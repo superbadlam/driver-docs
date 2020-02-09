@@ -3,10 +3,7 @@ package ru.driverdocs;
 import org.davidmoten.rx.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.driverdocs.rxrepositories.DriverLicenseRepository;
-import ru.driverdocs.rxrepositories.DriverLicenseRepositoryImpl;
-import ru.driverdocs.rxrepositories.DriverRepository;
-import ru.driverdocs.rxrepositories.DriverRepositoryImpl;
+import ru.driverdocs.rxrepositories.*;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -19,6 +16,7 @@ public class DriverDocsSetting {
     private final String cssUrl;
     private final DriverRepository driverRepository;
     private final DriverLicenseRepository driverLicenseRepository;
+    private final MedicalRefRepository medicalRefRepository;
 
     private DriverDocsSetting() {
         db = buildDataBase();
@@ -26,6 +24,7 @@ public class DriverDocsSetting {
 
         driverRepository = new DriverRepositoryImpl(db);
         driverLicenseRepository = new DriverLicenseRepositoryImpl(db);
+        medicalRefRepository = new MedicalRefRepositoryImpl(db);
     }
 
     public static DriverDocsSetting getInstance() {
@@ -79,5 +78,9 @@ public class DriverDocsSetting {
 
     public DriverLicenseRepository getDriverLicenseRepository() {
         return driverLicenseRepository;
+    }
+
+    public MedicalRefRepository getMedicalRefRepository() {
+        return medicalRefRepository;
     }
 }
