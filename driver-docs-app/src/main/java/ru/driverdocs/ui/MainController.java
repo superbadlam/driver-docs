@@ -51,7 +51,7 @@ public final class MainController extends AbstractController {
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         cbFontSizeList.getItems().addAll(8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 48);
         cbFontSizeList.valueProperty().addListener((observable, oldValue, newValue) -> {
             log.trace("font size changed from {} to {}", oldValue, newValue);
@@ -59,13 +59,19 @@ public final class MainController extends AbstractController {
         });
         lblToday.setText((new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
 
-        try {
-            tabDrivers.setContent(DriverEditorController.build().getRootPane());
-            tabDriverCard.setContent(DriverDocumentsController.build().getRootPane());
-            tabPane.getSelectionModel().select(tabDriverCard);
-        } catch (IOException e) {
-            log.error("не удалось отбразить закладки", e);
-            errorInformer.displayError("не удалось отбразить закладки", e);
-        }
+
+        final DriverDocumentsController docController = DriverDocumentsController.build();
+        final DriverEditorController driverController = DriverEditorController.build();
+
+
+        tabDrivers.setContent(driverController.getRootPane());
+        tabDriverCard.setContent(docController.getRootPane());
+        tabPane.getSelectionModel().select(tabDriverCard);
+
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, oldTab, newTab) -> {
+            if (newTab == tabDriverCard)
+                docController.refresh();
+        });
     }
 }

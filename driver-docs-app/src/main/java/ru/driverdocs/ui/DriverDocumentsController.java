@@ -29,6 +29,7 @@ public class DriverDocumentsController extends AbstractController {
     private final DriverRepository driverRepository = DriverDocsSetting.getInstance().getDriverRepository();
     private final DriverLicenseRepository driverLicenseRepository = DriverDocsSetting.getInstance().getDriverLicenseRepository();
     private final MedicalRefRepository medicalRefRepository = DriverDocsSetting.getInstance().getMedicalRefRepository();
+
     @FXML
     private ComboBox<DriverImpl> cmbDrivers;
     @FXML
@@ -49,6 +50,10 @@ public class DriverDocumentsController extends AbstractController {
     private DatePicker dtRefStart;
     @FXML
     private Button btnRefApply;
+    @FXML
+    private Button btnLicDelete;
+    @FXML
+    private Button btnRefDelete;
 
     private SimpleObjectProperty<DriverImpl> currDriver = new SimpleObjectProperty<>();
     private DriverLicenseImpl currLicense = new DriverLicenseImpl();
@@ -90,10 +95,16 @@ public class DriverDocumentsController extends AbstractController {
 
     };
     private MedicalReferenceImpl currReference = new MedicalReferenceImpl();
+
     private final InvalidationListener driverChangeListener = ev -> {
         log.trace("выбран водитель: driver={}", currDriver.get());
-        findLicense();
-        findReference();
+        if (currDriver.get() != null) {
+            findLicense();
+            findReference();
+        } else {
+            clearLicenseInfo();
+            clearReferenceInfo();
+        }
     };
     private EventHandler<ActionEvent> referenceApplyAction = actionEvent -> {
         if (!MedicalRefValidator.isValidSeries(currReference.getSeries())) {
@@ -130,11 +141,47 @@ public class DriverDocumentsController extends AbstractController {
             }
         }
     };
+    private EventHandler<ActionEvent> licenseDeleteAction = actionEvent -> {
+        try {
+            driverLicenseRepository.delete(currLicense.getId()).blockingAwait();
+            log.info("удалили вод. удостоверение: driver={}, license={}", currDriver.get(), currLicense.toString());
+            clearLicenseInfo();
+        } catch (Exception e) {
+            log.warn("не удалось удалить вод. удостоверение: driver={}, license={}", currDriver.get(), currLicense.toString());
+            errorInformer.displayWarning("не удалось удалить вод. удостоверение!");
+        }
+
+    };
+    private EventHandler<ActionEvent> referenceDeleteAction = actionEvent -> {
+        try {
+            medicalRefRepository.delete(currReference.getId()).blockingAwait();
+            log.info("удалили мед. справку: driver={}, license={}", currDriver.get(), currReference.toString());
+            clearReferenceInfo();
+        } catch (Exception e) {
+            log.warn("не удалось удалить мед. справку: driver={}, license={}", currDriver.get(), currReference.toString());
+            errorInformer.displayWarning("не удалось удалить currReference!");
+        }
+
+    };
 
     public static DriverDocumentsController build() throws IOException {
         DriverDocumentsController c = new DriverDocumentsController();
         c.load(FXML_FILE);
         return c;
+    }
+
+    public void refresh() {
+        cmbDrivers.getItems().setAll(driverRepository.findAll().map(DriverImpl::createOf).toList().blockingGet());
+        cmbDrivers.setValue(null);
+        log.trace("обновили список водителей: количество-водителей={}", cmbDrivers.getItems().size());
+    }
+
+    private void clearLicenseInfo() {
+        currLicense.setId(0);
+        currLicense.setSeries("");
+        currLicense.setNumber("");
+        currLicense.setStartdate(null);
+        currLicense.setEnddate(null);
     }
 
     private void findReference() {
@@ -146,12 +193,16 @@ public class DriverDocumentsController extends AbstractController {
             currReference.setStartdate(reference.getStartdate());
             log.trace("нашли вод. справку: driver={} reference={}", currDriver.get(), currReference);
         } catch (Exception e) {
-            currReference.setId(0);
-            currReference.setSeries("");
-            currReference.setNumber("");
-            currReference.setStartdate(null);
+            clearReferenceInfo();
             log.warn("не удалось найти вод. справку: driver={}", currDriver.get());
         }
+    }
+
+    private void clearReferenceInfo() {
+        currReference.setId(0);
+        currReference.setSeries("");
+        currReference.setNumber("");
+        currReference.setStartdate(null);
     }
 
     private void findLicense() {
@@ -164,23 +215,26 @@ public class DriverDocumentsController extends AbstractController {
             currLicense.setEnddate(license.getEnddate());
             log.trace("нашли вод. удостоверение для водителя: driver={} license={}", currDriver.get(), currLicense);
         } catch (Exception e) {
-            currLicense.setId(0);
-            currLicense.setSeries("");
-            currLicense.setNumber("");
-            currLicense.setStartdate(null);
-            currLicense.setEnddate(null);
+            clearLicenseInfo();
             log.warn("не удалось найти удостоверение для водителя: driver={}", currDriver.get());
         }
     }
 
     @FXML
     private void initialize() {
+
         cmbDrivers.getItems().addAll(driverRepository.findAll().map(DriverImpl::createOf).toList().blockingGet());
         currDriver.bind(cmbDrivers.valueProperty());
         currDriver.addListener(driverChangeListener);
 
+//        dtLicEnd.setDisable(true);
+        dtLicStart.valueProperty().addListener(ev -> dtLicEnd.setValue(
+                dtLicStart.getValue() == null ? null : dtLicStart.getValue().plusYears(10)));
+
         btnLicApply.disableProperty().bind(cmbDrivers.valueProperty().isNull());
         btnRefApply.disableProperty().bind(cmbDrivers.valueProperty().isNull());
+        btnLicDelete.disableProperty().bind(currLicense.idProperty().isEqualTo(0));
+        btnRefDelete.disableProperty().bind(currReference.idProperty().isEqualTo(0));
 
 
         currLicense.seriesProperty().bindBidirectional(txtLicSeries.textProperty());
@@ -188,12 +242,13 @@ public class DriverDocumentsController extends AbstractController {
         currLicense.startdateProperty().bindBidirectional(dtLicStart.valueProperty());
         currLicense.enddateProperty().bindBidirectional(dtLicEnd.valueProperty());
         btnLicApply.setOnAction(licenseApplyAction);
+        btnLicDelete.setOnAction(licenseDeleteAction);
 
 
         currReference.seriesProperty().bindBidirectional(txtRefSeries.textProperty());
         currReference.numberProperty().bindBidirectional(txtRefNumber.textProperty());
         currReference.startdateProperty().bindBidirectional(dtRefStart.valueProperty());
         btnRefApply.setOnAction(referenceApplyAction);
-
+        btnRefDelete.setOnAction(referenceDeleteAction);
     }
 }
