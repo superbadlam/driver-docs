@@ -3,11 +3,11 @@ package ru.driverdocs.domain;
 public interface Employer {
     long getId();
 
-    String getINN();
+    String getInn();
 
-    String getOGRN();
+    String getOgrn();
 
     String getName();
 
-    String getAdress();
+    String getAddress();
 }
