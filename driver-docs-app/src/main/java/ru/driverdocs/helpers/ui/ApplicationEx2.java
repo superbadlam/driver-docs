@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class ApplicationEx2 extends Application {
     protected Stage stage;
-    protected List<ApplicationCloseHandler> closeListeners = new ArrayList<>();
+    protected final List<ApplicationCloseHandler> closeListeners = new ArrayList<>();
 
     public boolean addCloseListeners(ApplicationCloseHandler e) {
         return closeListeners.add(e);

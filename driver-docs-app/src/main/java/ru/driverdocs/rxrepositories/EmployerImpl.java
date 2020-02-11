@@ -87,7 +87,5 @@ final class EmployerImpl implements Employer {
                 throw new IllegalArgumentException("адрес не может отсутствовать");
             return new EmployerImpl(this);
         }
-
-        ;
     }
 }

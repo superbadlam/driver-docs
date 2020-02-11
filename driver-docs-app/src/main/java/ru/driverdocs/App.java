@@ -17,7 +17,7 @@ public class App extends ApplicationEx2 {
     public static final String IMG_APP_ICON = "/png/app.png";
     public static final String version = "1.0.20191228.alpha";
     public static final String APPLICATION_NAME = "driver-docs";
-    private static Logger log = LoggerFactory.getLogger(App.class);
+    private static final Logger log = LoggerFactory.getLogger(App.class);
     private final Database db = DriverDocsSetting.getInstance().getDatabase();
     private final String cssUrl = DriverDocsSetting.getInstance().getCssUrl();
     private final ErrorInformer2 errorInformer = new ErrorInformer2(cssUrl);
