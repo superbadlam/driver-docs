@@ -17,6 +17,10 @@ public class DriverDocsSetting {
     private final DriverRepository driverRepository;
     private final DriverLicenseRepository driverLicenseRepository;
     private final MedicalRefRepository medicalRefRepository;
+    private final RouteRepository routeRepository;
+    private final TransportRepository transportRepository;
+    private final EmployerRepository employerRepository;
+    private final EmployerLicenseRepository employerLicenseRepository;
 
     private DriverDocsSetting() {
         db = buildDataBase();
@@ -25,6 +29,10 @@ public class DriverDocsSetting {
         driverRepository = new DriverRepositoryImpl(db);
         driverLicenseRepository = new DriverLicenseRepositoryImpl(db);
         medicalRefRepository = new MedicalRefRepositoryImpl(db);
+        routeRepository = new RouteRepositoryImpl(db);
+        transportRepository = new TransportRepositoryImpl(db);
+        employerRepository = new EmployerRepositoryImpl(db);
+        employerLicenseRepository = new EmployerLicenseRepositoryImpl(db);
     }
 
     public static DriverDocsSetting getInstance() {
@@ -68,6 +76,22 @@ public class DriverDocsSetting {
         return db;
     }
 
+    public RouteRepository getRouteRepository() {
+        return routeRepository;
+    }
+
+    public TransportRepository getTransportRepository() {
+        return transportRepository;
+    }
+
+    public EmployerRepository getEmployerRepository() {
+        return employerRepository;
+    }
+
+    public EmployerLicenseRepository getEmployerLicenseRepository() {
+        return employerLicenseRepository;
+    }
+
     public String getCssUrl() {
         return cssUrl;
     }
@@ -83,4 +107,5 @@ public class DriverDocsSetting {
     public MedicalRefRepository getMedicalRefRepository() {
         return medicalRefRepository;
     }
+
 }

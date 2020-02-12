@@ -1,4 +1,4 @@
-package ru.driverdocs.ui;
+package ru.driverdocs.helpers.ui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;

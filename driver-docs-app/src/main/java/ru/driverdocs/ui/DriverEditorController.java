@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.DriverDocsSetting;
 import ru.driverdocs.helpers.ui.AbstractController;
+import ru.driverdocs.helpers.ui.ActionColumn;
+import ru.driverdocs.helpers.ui.DatePickerCell;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
 import ru.driverdocs.rxrepositories.DriverRepository;
 
@@ -107,7 +109,18 @@ public class DriverEditorController extends AbstractController {
         colSecondname.setCellValueFactory(new PropertyValueFactory<>("secondname"));
         colBirthdate.setCellValueFactory(new PropertyValueFactory<>("birthdate"));
 
-        colDelete.setCellFactory(col -> new ActionColumn());
+        colDelete.setCellFactory(col -> new ActionColumn<>(selRow -> {
+            try {
+                DriverImpl driver = tblDrivers.getItems().get(selRow);
+                log.trace("удалим водителя: id={}, lastname={},firstname={}, secondname={}",
+                        driver.getId(), driver.getLastname(), driver.getFirstname(), driver.getSecondname());
+                repo.delete(driver.getId()).blockingAwait();
+                tblDrivers.getItems().remove(selRow.intValue());
+            } catch (Exception e) {
+                log.warn("не удалось удалить водителя", e);
+                errorInformer.displayError("не удалось удалить водителя", e);
+            }
+        }));
 
         List<DriverImpl> drivers = repo.findAll().map(DriverImpl::createOf).toList().blockingGet();
         tblDrivers.getItems().addAll(drivers);
@@ -170,32 +183,32 @@ public class DriverEditorController extends AbstractController {
         });
     }
 
-    private class ActionColumn extends TableCell<DriverImpl, String> {
-        Button btn = new Button("удалить");
-
-        public ActionColumn() {
-            btn.setOnAction(ev -> {
-                try {
-                    DriverImpl driver = getTableView().getItems().get(getTableRow().getIndex());
-                    log.trace("удалим водителя: id={}, lastname={},firstname={}, secondname={}", driver.getId(), driver.getLastname(), driver.getFirstname(), driver.getSecondname());
-                    repo.delete(driver.getId()).blockingAwait();
-                    tblDrivers.getItems().remove(getTableRow().getIndex());
-                } catch (Exception e) {
-                    errorInformer.displayError("не удалось удалить водителя", e);
-                }
-
-            });
-        }
-
-        @Override
-        protected void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-            if (empty || getTableRow() == null) {
-                setGraphic(null);
-            } else {
-                setGraphic(btn);
-            }
-        }
-    }
+//    private class ActionColumn extends TableCell<DriverImpl, String> {
+//        Button btn = new Button("удалить");
+//
+//        public ActionColumn() {
+//            btn.setOnAction(ev -> {
+//                try {
+//                    DriverImpl driver = getTableView().getItems().get(getTableRow().getIndex());
+//                    log.trace("удалим водителя: id={}, lastname={},firstname={}, secondname={}", driver.getId(), driver.getLastname(), driver.getFirstname(), driver.getSecondname());
+//                    repo.delete(driver.getId()).blockingAwait();
+//                    tblDrivers.getItems().remove(getTableRow().getIndex());
+//                } catch (Exception e) {
+//                    errorInformer.displayError("не удалось удалить водителя", e);
+//                }
+//
+//            });
+//        }
+//
+//        @Override
+//        protected void updateItem(String item, boolean empty) {
+//            super.updateItem(item, empty);
+//            if (empty || getTableRow() == null) {
+//                setGraphic(null);
+//            } else {
+//                setGraphic(btn);
+//            }
+//        }
+//    }
 
 }

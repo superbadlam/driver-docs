@@ -37,8 +37,14 @@ public final class MainController extends AbstractController {
     @FXML
     private Tab tabReports;
     @FXML
+    private Tab tabRoutes;
+    @FXML
     private TabPane tabPane;
 
+
+    private DriverDocumentsController driverDocumentsController;
+    private DriverEditorController driverController;
+    private RouteEditorController routeController;
 
     private MainController() {
         super();
@@ -51,7 +57,7 @@ public final class MainController extends AbstractController {
     }
 
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
         cbFontSizeList.getItems().addAll(8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 48);
         cbFontSizeList.valueProperty().addListener((observable, oldValue, newValue) -> {
             log.trace("font size changed from {} to {}", oldValue, newValue);
@@ -60,18 +66,54 @@ public final class MainController extends AbstractController {
         lblToday.setText((new SimpleDateFormat("dd-MM-yyyy").format(new Date())));
 
 
-        final DriverDocumentsController docController = DriverDocumentsController.build();
-        final DriverEditorController driverController = DriverEditorController.build();
-
-
-        tabDrivers.setContent(driverController.getRootPane());
-        tabDriverCard.setContent(docController.getRootPane());
-        tabPane.getSelectionModel().select(tabDriverCard);
-
-
         tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, oldTab, newTab) -> {
-            if (newTab == tabDriverCard)
-                docController.refresh();
+            if (newTab == tabDriverCard) {
+                showDriverDocumentsTab();
+            } else if (newTab == tabDrivers) {
+                showDriverEditorTab();
+            } else if (newTab == tabRoutes) {
+                showRouteEditorTab();
+            }
         });
+
+        tabPane.getSelectionModel().select(tabRoutes);
+    }
+
+    private void showRouteEditorTab() {
+        try {
+            if (routeController == null) {
+                routeController = RouteEditorController.build();
+                tabRoutes.setContent(routeController.getRootPane());
+            }
+        } catch (IOException e) {
+            log.warn("не удалось отобразить UI для редактирования списка маршрутов", e);
+            errorInformer.displayError("не удалось отобразить UI для редактирования списка маршрутов", e);
+        }
+    }
+
+    private void showDriverEditorTab() {
+        try {
+            if (driverController == null) {
+                driverController = DriverEditorController.build();
+                tabDrivers.setContent(driverController.getRootPane());
+            }
+        } catch (IOException e) {
+            log.warn("не удалось отобразить UI для редактирования водителей", e);
+            errorInformer.displayError("не удалось отобразить UI для редактирования водителей", e);
+        }
+    }
+
+    private void showDriverDocumentsTab() {
+        try {
+            if (driverDocumentsController == null) {
+                driverDocumentsController = DriverDocumentsController.build();
+                tabDriverCard.setContent(driverDocumentsController.getRootPane());
+            } else {
+                driverDocumentsController.refresh();
+            }
+        } catch (IOException e) {
+            log.warn("не удалось отобразить UI для редактирования док-ов водителя", e);
+            errorInformer.displayError("не удалось отобразить UI для редактирования док-ов водителя", e);
+        }
     }
 }

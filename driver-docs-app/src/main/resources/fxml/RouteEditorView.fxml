@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--        fx:controller="ru.driverdocs.DriverEditorControllerr"-->
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -18,7 +16,7 @@
         </VBox>
     </top>
     <center>
-        <TableView fx:id="tblDrivers" editable="true" BorderPane.alignment="CENTER">
+        <TableView fx:id="tblEmployers" editable="true" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="colName" prefWidth="75.0" text="Название"/>
                 <TableColumn fx:id="colDelete" prefWidth="75.0" text="удалить"/>

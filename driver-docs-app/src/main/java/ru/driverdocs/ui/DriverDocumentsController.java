@@ -1,5 +1,6 @@
 package ru.driverdocs.ui;
 
+import io.reactivex.Flowable;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -17,7 +18,6 @@ import ru.driverdocs.domain.MedicalReference;
 import ru.driverdocs.helpers.ui.AbstractController;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
 import ru.driverdocs.rxrepositories.DriverLicenseRepository;
-import ru.driverdocs.rxrepositories.DriverRepository;
 import ru.driverdocs.rxrepositories.MedicalRefRepository;
 
 import java.io.IOException;
@@ -26,7 +26,8 @@ public class DriverDocumentsController extends AbstractController {
     private static final String FXML_FILE = "/fxml/DriverDocumentsEditorView.fxml";
     private static Logger log = LoggerFactory.getLogger(DriverDocumentsController.class);
     private final ErrorInformer2 errorInformer = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
-    private final DriverRepository driverRepository = DriverDocsSetting.getInstance().getDriverRepository();
+    private final Flowable<DriverImpl> driversSupplier =
+            DriverDocsSetting.getInstance().getDriverRepository().findAll().map(DriverImpl::createOf);
     private final DriverLicenseRepository driverLicenseRepository = DriverDocsSetting.getInstance().getDriverLicenseRepository();
     private final MedicalRefRepository medicalRefRepository = DriverDocsSetting.getInstance().getMedicalRefRepository();
 
@@ -170,11 +171,6 @@ public class DriverDocumentsController extends AbstractController {
         return c;
     }
 
-    public void refresh() {
-        cmbDrivers.getItems().setAll(driverRepository.findAll().map(DriverImpl::createOf).toList().blockingGet());
-        cmbDrivers.setValue(null);
-        log.trace("обновили список водителей: количество-водителей={}", cmbDrivers.getItems().size());
-    }
 
     private void clearLicenseInfo() {
         currLicense.setId(0);
@@ -220,10 +216,16 @@ public class DriverDocumentsController extends AbstractController {
         }
     }
 
+    public void refresh() {
+        cmbDrivers.getItems().setAll(driversSupplier.toList().blockingGet());
+        cmbDrivers.setValue(null);
+        log.trace("обновили список водителей: количество-водителей={}", cmbDrivers.getItems().size());
+    }
+
     @FXML
     private void initialize() {
 
-        cmbDrivers.getItems().addAll(driverRepository.findAll().map(DriverImpl::createOf).toList().blockingGet());
+        refresh();
         currDriver.bind(cmbDrivers.valueProperty());
         currDriver.addListener(driverChangeListener);
 
