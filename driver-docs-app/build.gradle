@@ -3,7 +3,7 @@ plugins {
 }
 
 //compileJava.options.encoding='windows-1251'
-//compileJava.options.encoding='UTF-8'
+compileJava.options.encoding='UTF-8'
 
 group 'ru.driver-docs'
 
@@ -21,7 +21,7 @@ dependencies {
     compile group: 'com.github.davidmoten', name: 'rxjava2-jdbc', version: '0.2.6'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 
-    runtime "com.h2database:h2:1.4.200"
+    compile "com.h2database:h2:1.4.200"
 //    runtime "com.h2database:h2:1.4.196"
 }
 
