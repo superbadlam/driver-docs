@@ -1,11 +1,11 @@
-package ru.driverdocs.ui;
+package ru.driverdocs.ui.data;
 
 import javafx.beans.property.*;
 import ru.driverdocs.domain.MedicalReference;
 
 import java.time.LocalDate;
 
-class MedicalReferenceImpl implements MedicalReference {
+public class MedicalReferenceImpl implements MedicalReference {
     private ObjectProperty<LocalDate> startdate = new SimpleObjectProperty<>();
     private StringProperty number = new SimpleStringProperty();
     private StringProperty series = new SimpleStringProperty();
@@ -16,11 +16,11 @@ class MedicalReferenceImpl implements MedicalReference {
         return startdate.get();
     }
 
-    void setStartdate(LocalDate startdate) {
+    public void setStartdate(LocalDate startdate) {
         this.startdate.set(startdate);
     }
 
-    ObjectProperty<LocalDate> startdateProperty() {
+    public ObjectProperty<LocalDate> startdateProperty() {
         return startdate;
     }
 
@@ -29,11 +29,11 @@ class MedicalReferenceImpl implements MedicalReference {
         return number.get();
     }
 
-    void setNumber(String number) {
+    public void setNumber(String number) {
         this.number.set(number);
     }
 
-    StringProperty numberProperty() {
+    public StringProperty numberProperty() {
         return number;
     }
 
@@ -42,11 +42,11 @@ class MedicalReferenceImpl implements MedicalReference {
         return series.get();
     }
 
-    void setSeries(String series) {
+    public void setSeries(String series) {
         this.series.set(series);
     }
 
-    StringProperty seriesProperty() {
+    public StringProperty seriesProperty() {
         return series;
     }
 
@@ -59,7 +59,7 @@ class MedicalReferenceImpl implements MedicalReference {
         this.id.set(id);
     }
 
-    LongProperty idProperty() {
+    public LongProperty idProperty() {
         return id;
     }
 

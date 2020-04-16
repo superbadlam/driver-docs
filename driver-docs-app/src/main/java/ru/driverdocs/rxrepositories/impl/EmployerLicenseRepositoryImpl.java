@@ -1,4 +1,4 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.impl;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
@@ -7,6 +7,8 @@ import org.davidmoten.rx.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.domain.EmployerLicense;
+import ru.driverdocs.rxrepositories.EmployerLicenseRepository;
+import ru.driverdocs.rxrepositories.data.EmployerLicenseImpl;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -17,7 +19,7 @@ import static ru.driverdocs.helpers.ConvUtils.toSqlDate;
 
 public final class EmployerLicenseRepositoryImpl implements EmployerLicenseRepository {
 
-    private static Logger log = LoggerFactory.getLogger(EmployerLicenseRepositoryImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(EmployerLicenseRepositoryImpl.class);
     private final Database db;
 
     public EmployerLicenseRepositoryImpl(Database db) {

@@ -1,4 +1,4 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.impl;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
@@ -7,11 +7,13 @@ import org.davidmoten.rx.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.domain.Employer;
+import ru.driverdocs.rxrepositories.EmployerRepository;
+import ru.driverdocs.rxrepositories.data.EmployerImpl;
 
 import java.util.Arrays;
 
 public class EmployerRepositoryImpl implements EmployerRepository {
-    private static Logger log = LoggerFactory.getLogger(DriverRepositoryImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DriverRepositoryImpl.class);
     private final Database db;
 
     public EmployerRepositoryImpl(Database db) {

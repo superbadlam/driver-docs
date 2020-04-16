@@ -1,4 +1,4 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.impl;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
@@ -7,12 +7,14 @@ import org.davidmoten.rx.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.domain.Transport;
+import ru.driverdocs.rxrepositories.TransportRepository;
+import ru.driverdocs.rxrepositories.data.TransportImpl;
 
 import java.util.Arrays;
 
 public final class TransportRepositoryImpl implements TransportRepository {
 
-    private static Logger log = LoggerFactory.getLogger(TransportRepositoryImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(TransportRepositoryImpl.class);
     private final Database db;
 
     public TransportRepositoryImpl(Database db) {

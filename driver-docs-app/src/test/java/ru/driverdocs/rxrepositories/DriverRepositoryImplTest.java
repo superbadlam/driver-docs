@@ -6,6 +6,7 @@ import org.davidmoten.rx.jdbc.tuple.Tuple2;
 import org.h2.jdbc.JdbcBatchUpdateException;
 import org.junit.jupiter.api.Test;
 import ru.driverdocs.domain.Driver;
+import ru.driverdocs.rxrepositories.impl.DriverRepositoryImpl;
 
 import java.time.LocalDate;
 import java.util.Arrays;

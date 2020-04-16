@@ -1,8 +1,8 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.data;
 
 import ru.driverdocs.domain.Transport;
 
-final class TransportImpl implements Transport {
+public final class TransportImpl implements Transport {
     private final long id;
     private final String plateNo;
     private final String marka;

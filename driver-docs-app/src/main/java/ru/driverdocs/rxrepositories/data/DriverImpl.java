@@ -1,10 +1,10 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.data;
 
 import ru.driverdocs.domain.Driver;
 
 import java.time.LocalDate;
 
-final class DriverImpl implements Driver {
+public final class DriverImpl implements Driver {
 
     final private long id;
     final private String firstname;

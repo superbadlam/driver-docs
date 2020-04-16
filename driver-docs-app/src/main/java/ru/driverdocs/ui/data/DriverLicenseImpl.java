@@ -1,11 +1,11 @@
-package ru.driverdocs.ui;
+package ru.driverdocs.ui.data;
 
 import javafx.beans.property.*;
 import ru.driverdocs.domain.DriverLicense;
 
 import java.time.LocalDate;
 
-class DriverLicenseImpl implements DriverLicense {
+public class DriverLicenseImpl implements DriverLicense {
     private final LongProperty id = new SimpleLongProperty();
     private final StringProperty series = new SimpleStringProperty();
     private final StringProperty number = new SimpleStringProperty();
@@ -21,7 +21,7 @@ class DriverLicenseImpl implements DriverLicense {
         this.id.set(id);
     }
 
-    LongProperty idProperty() {
+    public LongProperty idProperty() {
         return id;
     }
 
@@ -30,11 +30,11 @@ class DriverLicenseImpl implements DriverLicense {
         return series.get();
     }
 
-    void setSeries(String series) {
+    public void setSeries(String series) {
         this.series.set(series);
     }
 
-    StringProperty seriesProperty() {
+    public StringProperty seriesProperty() {
         return series;
     }
 
@@ -43,11 +43,11 @@ class DriverLicenseImpl implements DriverLicense {
         return number.get();
     }
 
-    void setNumber(String number) {
+    public void setNumber(String number) {
         this.number.set(number);
     }
 
-    StringProperty numberProperty() {
+    public StringProperty numberProperty() {
         return number;
     }
 
@@ -56,11 +56,11 @@ class DriverLicenseImpl implements DriverLicense {
         return startdate.get();
     }
 
-    void setStartdate(LocalDate startdate) {
+    public void setStartdate(LocalDate startdate) {
         this.startdate.set(startdate);
     }
 
-    ObjectProperty<LocalDate> startdateProperty() {
+    public ObjectProperty<LocalDate> startdateProperty() {
         return startdate;
     }
 
@@ -69,11 +69,11 @@ class DriverLicenseImpl implements DriverLicense {
         return enddate.get();
     }
 
-    void setEnddate(LocalDate enddate) {
+    public void setEnddate(LocalDate enddate) {
         this.enddate.set(enddate);
     }
 
-    ObjectProperty<LocalDate> enddateProperty() {
+    public ObjectProperty<LocalDate> enddateProperty() {
         return enddate;
     }
 

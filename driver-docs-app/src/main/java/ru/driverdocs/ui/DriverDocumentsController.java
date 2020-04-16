@@ -19,6 +19,11 @@ import ru.driverdocs.helpers.ui.AbstractController;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
 import ru.driverdocs.rxrepositories.DriverLicenseRepository;
 import ru.driverdocs.rxrepositories.MedicalRefRepository;
+import ru.driverdocs.ui.data.DriverImpl;
+import ru.driverdocs.ui.data.DriverLicenseImpl;
+import ru.driverdocs.ui.data.MedicalReferenceImpl;
+import ru.driverdocs.ui.validator.DriverLicenseValidator;
+import ru.driverdocs.ui.validator.MedicalRefValidator;
 
 import java.io.IOException;
 

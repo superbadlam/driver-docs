@@ -12,6 +12,7 @@ import ru.driverdocs.helpers.ui.ActionColumn;
 import ru.driverdocs.helpers.ui.DatePickerCell;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
 import ru.driverdocs.rxrepositories.DriverRepository;
+import ru.driverdocs.ui.data.DriverImpl;
 
 import java.io.IOException;
 import java.time.LocalDate;

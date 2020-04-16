@@ -1,4 +1,4 @@
-package ru.driverdocs.ui;
+package ru.driverdocs.ui.validator;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -6,9 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DriverLicenseValidator {
-    private static Pattern SERIES_PATTERN = Pattern.compile("[0-9][0-9] [0-9][0-9]");
-    private static Pattern NUMBER_PATTERN = Pattern.compile("([0-9]{6})");
-    private static long EXPIRY_YEARS = 10;
+    private static final Pattern SERIES_PATTERN = Pattern.compile("[0-9][0-9] [0-9][0-9]");
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("([0-9]{6})");
+    private static final long EXPIRY_YEARS = 10;
 
     public static boolean isValidSeries(String series) {
         Matcher matcher = SERIES_PATTERN.matcher(series);

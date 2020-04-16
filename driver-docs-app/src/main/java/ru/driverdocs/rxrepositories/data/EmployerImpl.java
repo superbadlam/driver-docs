@@ -1,8 +1,8 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.data;
 
 import ru.driverdocs.domain.Employer;
 
-final class EmployerImpl implements Employer {
+public final class EmployerImpl implements Employer {
     private long id;
     private String inn;
     private String ogrn;

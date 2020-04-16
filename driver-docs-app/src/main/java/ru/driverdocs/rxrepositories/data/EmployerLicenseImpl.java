@@ -1,23 +1,23 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.data;
 
-import ru.driverdocs.domain.MedicalReference;
+import ru.driverdocs.domain.EmployerLicense;
 
 import java.time.LocalDate;
 
-final class MedicalReferenceImpl implements MedicalReference {
+public final class EmployerLicenseImpl implements EmployerLicense {
     private LocalDate startdate;
     private String number;
     private String series;
     private long id;
 
-    private MedicalReferenceImpl(long id, String series, String number, LocalDate startdate) {
+    private EmployerLicenseImpl(long id, String series, String number, LocalDate startdate) {
         this.startdate = startdate;
         this.number = number;
         this.series = series;
         this.id = id;
     }
 
-    public static MedicalReferenceImpl createOf(long id, String series, String number, LocalDate startdate) {
+    public static EmployerLicenseImpl createOf(long id, String series, String number, LocalDate startdate) {
         if (id <= 0)
             throw new IllegalArgumentException("id не может принимать значения меньше единицы");
         if (series == null || series.trim().isEmpty())
@@ -27,7 +27,7 @@ final class MedicalReferenceImpl implements MedicalReference {
         if (startdate == null)
             throw new IllegalArgumentException("startdate не может отсутствовать");
 
-        return new MedicalReferenceImpl(id, series, number, startdate);
+        return new EmployerLicenseImpl(id, series, number, startdate);
     }
 
     @Override

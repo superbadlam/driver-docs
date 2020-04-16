@@ -4,6 +4,7 @@ import org.davidmoten.rx.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.rxrepositories.*;
+import ru.driverdocs.rxrepositories.impl.*;
 
 import java.io.File;
 import java.net.MalformedURLException;

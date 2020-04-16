@@ -1,4 +1,4 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.impl;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
@@ -7,6 +7,8 @@ import org.davidmoten.rx.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.domain.Driver;
+import ru.driverdocs.rxrepositories.DriverRepository;
+import ru.driverdocs.rxrepositories.data.DriverImpl;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -17,7 +19,7 @@ import static ru.driverdocs.helpers.ConvUtils.toSqlDate;
 
 public final class DriverRepositoryImpl implements DriverRepository {
 
-    private static Logger log = LoggerFactory.getLogger(DriverRepositoryImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DriverRepositoryImpl.class);
     private final Database db;
 
     public DriverRepositoryImpl(Database db) {

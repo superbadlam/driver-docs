@@ -1,10 +1,10 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.data;
 
 import ru.driverdocs.domain.DriverLicense;
 
 import java.time.LocalDate;
 
-final class DriverLicenseImpl implements DriverLicense {
+public final class DriverLicenseImpl implements DriverLicense {
     private final long id;
     private final String series;
     private final String number;

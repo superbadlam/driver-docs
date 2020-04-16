@@ -1,8 +1,8 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.data;
 
 import ru.driverdocs.domain.Route;
 
-final class RouteImpl implements Route {
+public final class RouteImpl implements Route {
     private long id;
     private String name;
 

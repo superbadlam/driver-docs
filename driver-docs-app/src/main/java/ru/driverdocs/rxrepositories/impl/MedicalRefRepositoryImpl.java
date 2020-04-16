@@ -1,4 +1,4 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.impl;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
@@ -7,6 +7,8 @@ import org.davidmoten.rx.jdbc.Database;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.domain.MedicalReference;
+import ru.driverdocs.rxrepositories.MedicalRefRepository;
+import ru.driverdocs.rxrepositories.data.MedicalReferenceImpl;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -17,7 +19,7 @@ import static ru.driverdocs.helpers.ConvUtils.toSqlDate;
 
 public final class MedicalRefRepositoryImpl implements MedicalRefRepository {
 
-    private static Logger log = LoggerFactory.getLogger(MedicalRefRepositoryImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(MedicalRefRepositoryImpl.class);
     private final Database db;
 
     public MedicalRefRepositoryImpl(Database db) {
