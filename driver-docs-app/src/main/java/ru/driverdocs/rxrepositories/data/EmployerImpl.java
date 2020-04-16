@@ -3,11 +3,11 @@ package ru.driverdocs.rxrepositories.data;
 import ru.driverdocs.domain.Employer;
 
 public final class EmployerImpl implements Employer {
-    private long id;
-    private String inn;
-    private String ogrn;
-    private String name;
-    private String address;
+    private final long id;
+    private final String inn;
+    private final String ogrn;
+    private final String name;
+    private final String address;
 
     @Override
     public long getId() {

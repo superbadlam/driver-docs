@@ -5,10 +5,10 @@ import ru.driverdocs.domain.EmployerLicense;
 import java.time.LocalDate;
 
 public final class EmployerLicenseImpl implements EmployerLicense {
-    private LocalDate startdate;
-    private String number;
-    private String series;
-    private long id;
+    private final LocalDate startdate;
+    private final String number;
+    private final String series;
+    private final long id;
 
     private EmployerLicenseImpl(long id, String series, String number, LocalDate startdate) {
         this.startdate = startdate;

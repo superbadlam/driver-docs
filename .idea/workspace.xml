@@ -1,36 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a55bd92e-7ee1-4afc-84ae-e9f917c83816" name="Default Changelist" comment="fix build script">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/DriverDocsSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/DriverDocsSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/DriverImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/DriverImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/DriverLicenseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/DriverLicenseImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/DriverLicenseRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/impl/DriverLicenseRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/DriverRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/impl/DriverRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/EmployerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/EmployerLicenseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerLicenseImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/EmployerLicenseRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/impl/EmployerLicenseRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/EmployerRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/impl/EmployerRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/MedicalRefRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/impl/MedicalRefRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/MedicalReferenceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/MedicalReferenceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/RouteImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/RouteImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/RouteRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/impl/RouteRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/TransportImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/TransportImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/TransportRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/impl/TransportRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverDocumentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverDocumentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverEditorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/DriverImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverLicenseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/DriverLicenseImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverLicenseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/validator/DriverLicenseValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/MedicalRefValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/validator/MedicalRefValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/MedicalReferenceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/MedicalReferenceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/RouteEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/RouteEditorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/RouteImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/RouteImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverLicenseImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverLicenseImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverLicenseValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverLicenseValidatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverRepositoryImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverRepositoryImplTest.java" afterDir="false" />
+    <list default="true" id="a55bd92e-7ee1-4afc-84ae-e9f917c83816" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerOnRouteImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerLicenseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerLicenseImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/MedicalReferenceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/MedicalReferenceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/RouteImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/RouteImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +48,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -197,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587047504760</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="project refactoring">
+      <created>1587050500120</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587050500120</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,7 +204,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix build script" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix build script" />
+    <MESSAGE value="project refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="project refactoring" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -228,6 +219,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="428" y="173" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1587045493006" />
+    <state x="488" y="72" key="#com.intellij.ide.util.MemberChooser" timestamp="1587051292416">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="72" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1587051292416" />
     <state x="406" y="52" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1586982922685">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -236,14 +231,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="401" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1587046357944" />
-    <state x="302" y="31" key="CommitChangelistDialog2" timestamp="1587047512685">
+    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2" timestamp="1587050498883">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="302" y="31" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587047512685" />
-    <state x="129" y="49" key="DiffContextDialog" timestamp="1587047467861">
+    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587050498883" />
+    <state x="129" y="49" key="DiffContextDialog" timestamp="1587050449385">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="49" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587047467861" />
+    <state x="129" y="49" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587050449385" />
     <state width="1322" height="478" key="GridCell.Tab.0.bottom" timestamp="1587046115613">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

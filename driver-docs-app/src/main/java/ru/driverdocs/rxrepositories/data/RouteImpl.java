@@ -3,8 +3,8 @@ package ru.driverdocs.rxrepositories.data;
 import ru.driverdocs.domain.Route;
 
 public final class RouteImpl implements Route {
-    private long id;
-    private String name;
+    private final long id;
+    private final String name;
 
     private RouteImpl(long id, String name) {
         this.id = id;
