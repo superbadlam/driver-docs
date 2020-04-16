@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import ru.driverdocs.domain.Route;
 
-class RouteImpl {
+public class RouteImpl {
     private LongProperty id = new SimpleLongProperty();
     private StringProperty name = new SimpleStringProperty();
 

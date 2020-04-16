@@ -3,15 +3,15 @@ package ru.driverdocs.rxrepositories;
 import ru.driverdocs.domain.Transport;
 
 final class TransportImpl implements Transport {
-    private long id;
-    private String plateNo;
-    private String marka;
-    private String model;
-    private int seats;
-    private String passportSeries;
-    private String passportNumber;
-    private String certificateSeries;
-    private String certificateNumber;
+    private final long id;
+    private final String plateNo;
+    private final String marka;
+    private final String model;
+    private final int seats;
+    private final String passportSeries;
+    private final String passportNumber;
+    private final String certificateSeries;
+    private final String certificateNumber;
 
     public TransportImpl(Builder builder) {
         this.id = builder.id;

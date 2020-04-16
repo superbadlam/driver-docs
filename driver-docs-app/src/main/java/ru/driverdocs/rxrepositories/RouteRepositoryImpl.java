@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public final class RouteRepositoryImpl implements RouteRepository {
 
-    private static Logger log = LoggerFactory.getLogger(RouteRepositoryImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(RouteRepositoryImpl.class);
     private final Database db;
 
     public RouteRepositoryImpl(Database db) {
