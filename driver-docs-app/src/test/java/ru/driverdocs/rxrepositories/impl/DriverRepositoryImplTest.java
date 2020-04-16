@@ -1,4 +1,4 @@
-package ru.driverdocs.rxrepositories;
+package ru.driverdocs.rxrepositories.impl;
 
 import io.reactivex.Flowable;
 import org.davidmoten.rx.jdbc.Database;
@@ -6,7 +6,6 @@ import org.davidmoten.rx.jdbc.tuple.Tuple2;
 import org.h2.jdbc.JdbcBatchUpdateException;
 import org.junit.jupiter.api.Test;
 import ru.driverdocs.domain.Driver;
-import ru.driverdocs.rxrepositories.impl.DriverRepositoryImpl;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -15,12 +14,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DriverRepositoryImplTest {
-
-    private final int maxPoolSize = 1;
-    private final String url = "jdbc:h2:./db-test/dd";
-    private final String user = "sa";
-    private final String password = "driver-docs";
+class DriverRepositoryImplTest extends CommonRepositoryTest {
 
 
     @Test
@@ -49,12 +43,7 @@ class DriverRepositoryImplTest {
         final String secondname1 = "отчество-100";
         final LocalDate birthdate1 = LocalDate.now().minusDays(1);
 
-        try (Database db = Database
-                .nonBlocking()
-                .user(user).password(password)
-                .url(url).maxPoolSize(maxPoolSize)
-                .build()) {
-
+        testWithDatabase(db -> {
             long key = insertIntoDriver(lastname1, firstname1, secondname1, birthdate1, db);
 
             DriverRepositoryImpl repository = new DriverRepositoryImpl(db);
@@ -65,11 +54,7 @@ class DriverRepositoryImplTest {
             Integer integer = deleteFromDriver(db, key);
             assertEquals(1, (int) integer);
 
-            //--------------------------------------------------------
-
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
     private Integer deleteFromDriver(Database db, long key) {
@@ -100,13 +85,7 @@ class DriverRepositoryImplTest {
         final String secondname2 = "отчество-101";
         final LocalDate birthdate2 = LocalDate.now();
 
-
-        try (Database db = Database
-                .nonBlocking()
-                .user(user).password(password)
-                .url(url).maxPoolSize(maxPoolSize)
-                .build()) {
-
+        testWithDatabase(db -> {
             long key = insertIntoDriver(lastname1, firstname1, secondname1, birthdate1, db);
 
             DriverRepositoryImpl repository = new DriverRepositoryImpl(db);
@@ -125,11 +104,7 @@ class DriverRepositoryImplTest {
             Integer integer = deleteFromDriver(db, key);
             assertEquals(1, (int) integer);
 
-            //--------------------------------------------------------
-
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
 
@@ -149,15 +124,7 @@ class DriverRepositoryImplTest {
                 Arrays.asList(prefixLastname + suffix13, prefixFirstname + suffix13, prefixSecondname + suffix13, birthdate)
         );
         Flowable<Integer> suffixes = Flowable.just(suffix11, suffix12, suffix13);
-
-        try (Database db = Database
-                .nonBlocking()
-                .user(user)
-                .password(password)
-                .url(url)
-                .maxPoolSize(maxPoolSize)
-                .build()) {
-
+        testWithDatabase(db -> {
             clearTableDriver(db);
             //-------------------------------------------------------
             Map<Long, Tuple2<Long, Integer>> keys = db.update("insert into dd.driver(lastname,firstname,secondname,birthdate) values(?,?,?,?)")
@@ -186,11 +153,7 @@ class DriverRepositoryImplTest {
                             .parameters(keys.keySet())
                             .counts().blockingSingle().intValue()
             );
-            //--------------------------------------------------------
-
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
     private void clearTableDriver(Database db) {
@@ -221,20 +184,11 @@ class DriverRepositoryImplTest {
 
 
     private void createWhenAnyFieldIsNull(String lastname, String firstname, String secondname, LocalDate birthdate) {
-        try (Database db = Database
-                .nonBlocking()
-                .user(user)
-                .password(password)
-                .url(url)
-                .maxPoolSize(maxPoolSize)
-                .build()) {
-
+        testWithDatabase(db -> {
             DriverRepositoryImpl repository = new DriverRepositoryImpl(db);
             assertThrows(RuntimeException.class, () -> repository.create(lastname, firstname, secondname, birthdate).blockingGet());
 
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
 
@@ -245,14 +199,7 @@ class DriverRepositoryImplTest {
         final String secondname = "отчество-02";
         final LocalDate birthdate = LocalDate.now();
 
-        try (Database db = Database
-                .nonBlocking()
-                .user(user)
-                .password(password)
-                .url(url)
-                .maxPoolSize(maxPoolSize)
-                .build()) {
-
+        testWithDatabase(db -> {
             DriverRepositoryImpl repostory = new DriverRepositoryImpl(db);
             long driverId = repostory.create(lastname, firstname, secondname, birthdate).blockingGet();
             assertTrue(driverId > 0);
@@ -268,10 +215,7 @@ class DriverRepositoryImplTest {
 
             Integer integer = deleteFromDriver(db, driverId);
             assertEquals(1, (int) integer);
-
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
     @Test
@@ -282,14 +226,7 @@ class DriverRepositoryImplTest {
         final LocalDate birthdate = LocalDate.now();
 
 
-        try (Database db = Database
-                .nonBlocking()
-                .user(user)
-                .password(password)
-                .url(url)
-                .maxPoolSize(maxPoolSize)
-                .build()) {
-
+        testWithDatabase(db -> {
             clearTableDriver(db);
 
             long keyid = insertIntoDriver(lastname, firstname, secondname, birthdate, db);
@@ -297,10 +234,7 @@ class DriverRepositoryImplTest {
 
             DriverRepositoryImpl repostory = new DriverRepositoryImpl(db);
             repostory.delete(keyid - 1).blockingAwait();
-
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
     @Test
@@ -311,22 +245,12 @@ class DriverRepositoryImplTest {
         final LocalDate birthdate = LocalDate.now();
 
 
-        try (Database db = Database
-                .nonBlocking()
-                .user(user)
-                .password(password)
-                .url(url)
-                .maxPoolSize(maxPoolSize)
-                .build()) {
-
+        testWithDatabase(db -> {
             long keyid = insertIntoDriver(lastname, firstname, secondname, birthdate, db);
             assertTrue(keyid > 0);
 
             DriverRepositoryImpl repostory = new DriverRepositoryImpl(db);
             repostory.delete(keyid - 1).blockingAwait();
-
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 }

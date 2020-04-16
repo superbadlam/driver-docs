@@ -78,39 +78,8 @@ CREATE TABLE dd.route	(
 CREATE TABLE dd.route_employer(
 	keyid BIGINT IDENTITY(10,10), 
 	route_id BIGINT not null,
-	employer_id BIGINT not null
+	employer_id BIGINT not null,
 	
-	FOREIGN KEY (employer_id)  REFERENCES dd.employer(keyid)
+	FOREIGN KEY (employer_id)  REFERENCES dd.employer(keyid),
+	FOREIGN KEY (route_id)  REFERENCES dd.route(keyid)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
