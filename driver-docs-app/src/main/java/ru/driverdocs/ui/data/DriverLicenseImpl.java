@@ -13,6 +13,7 @@ public class DriverLicenseImpl implements DriverLicense {
     private final ObjectProperty<LocalDate> startdate = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalDate> enddate = new SimpleObjectProperty<>();
     private final BooleanProperty invalid = new SimpleBooleanProperty();
+    private final DriverLicenseValidator validator = new DriverLicenseValidator();
 
     public DriverLicenseImpl() {
         setInvalid(true);
@@ -26,19 +27,9 @@ public class DriverLicenseImpl implements DriverLicense {
                 -> setInvalid(isInvalid(number.get(), series.get(), startdate.get(), newValue)));
     }
 
-    private boolean isValid(String number, String series, LocalDate startdate, LocalDate enddate) {
-        return DriverLicenseValidator.isValidNumber(number)
-                && DriverLicenseValidator.isValidSeries(series)
-                && DriverLicenseValidator.isValidDateRange(startdate, enddate);
-    }
-
     private boolean isInvalid(String number, String series, LocalDate startdate, LocalDate enddate) {
-        return !isValid(number, series, startdate, enddate);
+        return !validator.isValid(number, series, startdate, enddate);
     }
-
-//    public boolean isValid() {
-//        return valid.get();
-//    }
 
     public BooleanProperty invalidProperty() {
         return invalid;

@@ -131,6 +131,7 @@ public class DriverEditorController extends AbstractController {
         tblDrivers.getItems().addAll(drivers);
 
         licenceControl.driverProperty().bind(tblDrivers.getSelectionModel().selectedItemProperty());
+        referenceControl.driverProperty().bind(tblDrivers.getSelectionModel().selectedItemProperty());
     }
 
     private void setupLastnameColumn() {

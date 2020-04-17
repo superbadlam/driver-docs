@@ -7,11 +7,13 @@ import ru.driverdocs.ui.validator.MedicalRefValidator;
 import java.time.LocalDate;
 
 public class MedicalReferenceImpl implements MedicalReference {
-    private ObjectProperty<LocalDate> startdate = new SimpleObjectProperty<>();
-    private StringProperty number = new SimpleStringProperty();
-    private StringProperty series = new SimpleStringProperty();
-    private LongProperty id = new SimpleLongProperty();
+    private final ObjectProperty<LocalDate> startdate = new SimpleObjectProperty<>();
+    private final StringProperty number = new SimpleStringProperty();
+    private final StringProperty series = new SimpleStringProperty();
+    private final LongProperty id = new SimpleLongProperty();
     private final BooleanProperty invalid = new SimpleBooleanProperty();
+    private final MedicalRefValidator validator = new MedicalRefValidator();
+
 
     public MedicalReferenceImpl() {
         setInvalid(true);
@@ -25,9 +27,7 @@ public class MedicalReferenceImpl implements MedicalReference {
     }
 
     private boolean isInvalid(String number, String series, LocalDate startdate) {
-        return !MedicalRefValidator.isValidNumber(number)
-                || !MedicalRefValidator.isValidSeries(series)
-                || !MedicalRefValidator.isValidDateRange(startdate);
+        return !validator.isValid(number, number, startdate);
     }
 
     public BooleanProperty invalidProperty() {

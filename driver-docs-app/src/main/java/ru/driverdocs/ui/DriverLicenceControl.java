@@ -32,7 +32,7 @@ public class DriverLicenceControl extends VBox {
     private final DriverLicenseImpl currLicense = new DriverLicenseImpl();
     private final ErrorInformer2 errorInformer
             = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
-
+    private final DriverLicenseValidator validator = new DriverLicenseValidator();
 
     @FXML
     private TextField txtLicSeries;
@@ -151,7 +151,7 @@ public class DriverLicenceControl extends VBox {
     }
 
     private void validateDateRange() {
-        if (!DriverLicenseValidator.isValidDateRange(dtLicStart.getValue(), dtLicEnd.getValue())) {
+        if (!validator.isValidDateRange(dtLicStart.getValue(), dtLicEnd.getValue())) {
             log.warn("дата начала и/или дата окончания " +
                     "вод. удостоверения имеют некорректное значения : " +
                     "startdate={}, enddate={}", dtLicStart.getValue(), dtLicEnd.getValue());
@@ -162,7 +162,7 @@ public class DriverLicenceControl extends VBox {
     }
 
     private void validateSeries() {
-        if (!DriverLicenseValidator.isValidSeries(txtLicSeries.getText())) {
+        if (!validator.isValidSeries(txtLicSeries.getText())) {
             log.warn("серия водительского удостоверения имеет некорректное значение: series={}",
                     txtLicSeries.getText());
             errorInformer.displayWarning("серия имеет некорректное значение!");
@@ -171,7 +171,7 @@ public class DriverLicenceControl extends VBox {
     }
 
     private void validateNumber() {
-        if (!DriverLicenseValidator.isValidNumber(txtLicNumber.getText())) {
+        if (!validator.isValidNumber(txtLicNumber.getText())) {
             log.warn("номер водительского удостоверения имеет некорректное значение: number={}", txtLicNumber.getText());
             errorInformer.displayWarning("номер имеет некорректное значение!");
             txtLicNumber.clear();
