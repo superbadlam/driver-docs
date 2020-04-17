@@ -5,6 +5,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import ru.driverdocs.ui.DriverLicenceControl?>
+<?import ru.driverdocs.ui.DriverMedicalReferenceControl?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
     <top>
         <VBox BorderPane.alignment="CENTER">
@@ -21,14 +23,27 @@
         </VBox>
     </top>
     <center>
-        <TableView fx:id="tblDrivers" editable="true" BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn fx:id="colLastname" prefWidth="75.0" text="Фамилия"/>
-                <TableColumn fx:id="colFirstname" prefWidth="75.0" text="Имя"/>
-                <TableColumn fx:id="colSecondname" prefWidth="75.0" text="Отчество"/>
-                <TableColumn fx:id="colBirthdate" prefWidth="75.0" text="дата рождения"/>
-                <TableColumn fx:id="colDelete" prefWidth="75.0" text="удалить"/>
-            </columns>
-        </TableView>
+        <SplitPane dividerPositions="0.65" BorderPane.alignment="CENTER">
+            <TableView fx:id="tblDrivers" editable="true">
+                <columns>
+                    <TableColumn fx:id="colLastname" prefWidth="75.0" text="Фамилия"/>
+                    <TableColumn fx:id="colFirstname" prefWidth="75.0" text="Имя"/>
+                    <TableColumn fx:id="colSecondname" prefWidth="75.0" text="Отчество"/>
+                    <TableColumn fx:id="colBirthdate" prefWidth="75.0" text="дата рождения"/>
+                    <TableColumn fx:id="colDelete" prefWidth="75.0" text="удалить"/>
+                </columns>
+            </TableView>
+            <Accordion>
+                <panes>
+                    <TitledPane animated="false" text="Водительское удостоверение">
+                        <DriverLicenceControl fx:id="licenceControl"/>
+                    </TitledPane>
+                    <TitledPane animated="false" text="Медицинская справка">
+                        <DriverMedicalReferenceControl fx:id="referenceControl"/>
+                    </TitledPane>
+                    <TitledPane animated="false" text="Паспортные данные "/>
+                </panes>
+            </Accordion>
+        </SplitPane>
     </center>
 </BorderPane>

@@ -47,6 +47,10 @@ public class DriverEditorController extends AbstractController {
     private TableColumn<DriverImpl, LocalDate> colBirthdate;
     @FXML
     private TableColumn<DriverImpl, String> colDelete;
+    @FXML
+    private DriverLicenceControl licenceControl;
+    @FXML
+    private DriverMedicalReferenceControl referenceControl;
 
     public static DriverEditorController build() throws IOException {
         DriverEditorController c = new DriverEditorController();
@@ -125,6 +129,8 @@ public class DriverEditorController extends AbstractController {
 
         List<DriverImpl> drivers = repo.findAll().map(DriverImpl::createOf).toList().blockingGet();
         tblDrivers.getItems().addAll(drivers);
+
+        licenceControl.driverProperty().bind(tblDrivers.getSelectionModel().selectedItemProperty());
     }
 
     private void setupLastnameColumn() {

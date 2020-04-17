@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a55bd92e-7ee1-4afc-84ae-e9f917c83816" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverLicenceControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverMedicalReferenceControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/ValidatePerformer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/driver-docs-app/src/main/resources/fxml/DriverLicenceControl.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/driver-docs-app/src/main/resources/fxml/DriverMedicalReferenceControl.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/EmployerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/impl/EmployerOnRouteRepositoryImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/impl/EmployerOnRouteRepositoryImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/DriverLicenseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/rxrepositories/data/DriverLicenseImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverDocumentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverDocumentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/DriverEditorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/DriverLicenseImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/DriverLicenseImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/MedicalReferenceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/MedicalReferenceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/validator/DriverLicenseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/validator/DriverLicenseValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/resources/fxml/DriverEditorView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/resources/fxml/DriverEditorView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverLicenseValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/test/java/ru/driverdocs/rxrepositories/DriverLicenseValidatePerformerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,9 +61,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -74,6 +84,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/driver-docs-app/src/main/resources/fxml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -83,42 +94,42 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="ru.driverdocs.rxrepositories.impl" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ru.driverdocs.rxrepositories.impl" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\projects\test\driver-docs\driver-docs-app\src\main\resources\fxml" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.driverdocs.ui" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="ru.driverdocs.rxrepositories.impl" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.EmployerOnRouteRepositoryImplTest">
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.driverdocs.App" />
+      <module name="driver-docs.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.driverdocs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EmployerOnRouteRepositoryImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/driver-docs-app" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="--tests &quot;ru.driverdocs.rxrepositories.impl.EmployerOnRouteRepositoryImplTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="EmployerOnRouteRepositoryImplTest.testDeleteWithError" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/driver-docs-app" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ru.driverdocs.rxrepositories.impl.EmployerOnRouteRepositoryImplTest.testDeleteWithError&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -191,11 +202,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.App" />
         <item itemvalue="Gradle.EmployerOnRouteRepositoryImplTest" />
         <item itemvalue="Gradle.EmployerOnRouteRepositoryImplTest.testFindAllByRoute" />
         <item itemvalue="Gradle.EmployerOnRouteRepositoryImplTest.testFindAllByEmployer" />
         <item itemvalue="Gradle.EmployerOnRouteRepositoryImplTest.testFindAllByEmployerWhenEmployrIdNotFound" />
-        <item itemvalue="Gradle.EmployerOnRouteRepositoryImplTest.testDeleteWithError" />
       </list>
     </recent_temporary>
   </component>
@@ -245,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587068818144</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="adding employer on route functionality">
+      <created>1587119035823</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1587119035823</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -274,14 +292,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="192" y="188" width="816" height="456" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1587044071245" />
+    <state x="413" y="121" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1587128663102">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="121" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1587128663102" />
     <state x="428" y="173" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587045493006">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="428" y="173" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1587045493006" />
-    <state x="488" y="72" key="#com.intellij.ide.util.MemberChooser" timestamp="1587063663276">
+    <state x="488" y="72" key="#com.intellij.ide.util.MemberChooser" timestamp="1587144130892">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="72" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1587063663276" />
+    <state x="488" y="72" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1587144130892" />
     <state x="412" y="144" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1587052324650">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -294,18 +316,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="390" y="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1587058828738" />
-    <state x="401" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587046357944">
+    <state x="224" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587146212882">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="401" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1587046357944" />
-    <state x="438" y="72" key="#xdebugger.evaluate" timestamp="1587118656210">
+    <state x="224" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1587146212882" />
+    <state x="438" y="72" key="#xdebugger.evaluate" timestamp="1587142598617">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="438" y="72" key="#xdebugger.evaluate/0.0.1366.728@0.0.1366.728" timestamp="1587118656210" />
-    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2" timestamp="1587068816241">
+    <state x="438" y="72" key="#xdebugger.evaluate/0.0.1366.728@0.0.1366.728" timestamp="1587142598617" />
+    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2" timestamp="1587119034605">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587068816241" />
+    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587119034605" />
     <state width="438" height="438" key="DebuggerActiveHint" timestamp="1587118265663">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -314,38 +336,38 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="129" y="49" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587050449385" />
-    <state width="1322" height="211" key="GridCell.Tab.0.bottom" timestamp="1587118906816">
+    <state width="1322" height="245" key="GridCell.Tab.0.bottom" timestamp="1587147137653">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="211" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587118906816" />
-    <state width="1322" height="211" key="GridCell.Tab.0.center" timestamp="1587118906816">
+    <state width="1322" height="245" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587147137653" />
+    <state width="1322" height="245" key="GridCell.Tab.0.center" timestamp="1587147137653">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="211" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587118906816" />
-    <state width="1322" height="211" key="GridCell.Tab.0.left" timestamp="1587118906816">
+    <state width="1322" height="245" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587147137653" />
+    <state width="1322" height="245" key="GridCell.Tab.0.left" timestamp="1587147137652">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="211" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587118906816" />
-    <state width="1322" height="211" key="GridCell.Tab.0.right" timestamp="1587118906816">
+    <state width="1322" height="245" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587147137652" />
+    <state width="1322" height="245" key="GridCell.Tab.0.right" timestamp="1587147137653">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="211" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587118906816" />
-    <state width="1322" height="181" key="GridCell.Tab.1.bottom" timestamp="1587118775735">
+    <state width="1322" height="245" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587147137653" />
+    <state width="1322" height="181" key="GridCell.Tab.1.bottom" timestamp="1587147099224">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="181" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587118775735" />
-    <state width="1322" height="181" key="GridCell.Tab.1.center" timestamp="1587118775735">
+    <state width="1322" height="181" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587147099224" />
+    <state width="1322" height="181" key="GridCell.Tab.1.center" timestamp="1587147099224">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="181" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587118775735" />
-    <state width="1322" height="181" key="GridCell.Tab.1.left" timestamp="1587118775735">
+    <state width="1322" height="181" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587147099224" />
+    <state width="1322" height="181" key="GridCell.Tab.1.left" timestamp="1587147099224">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="181" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587118775735" />
-    <state width="1322" height="181" key="GridCell.Tab.1.right" timestamp="1587118775735">
+    <state width="1322" height="181" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587147099224" />
+    <state width="1322" height="181" key="GridCell.Tab.1.right" timestamp="1587147099224">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="181" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587118775735" />
+    <state width="1322" height="181" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587147099224" />
     <state x="406" y="65" key="RollbackChangesDialog" timestamp="1587047480089">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -358,33 +380,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="454" y="163" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1366.728@0.0.1366.728" timestamp="1587058800044" />
-    <state x="413" y="128" key="extract.method.dialog" timestamp="1587067458554">
+    <state x="235" y="88" key="extract.method.dialog" timestamp="1587139259526">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="128" key="extract.method.dialog/0.0.1366.728@0.0.1366.728" timestamp="1587067458554" />
-    <state width="483" height="412" key="javadoc.popup.new" timestamp="1587115379800">
+    <state x="235" y="88" key="extract.method.dialog/0.0.1366.728@0.0.1366.728" timestamp="1587139259526" />
+    <state width="656" height="412" key="javadoc.popup.new" timestamp="1587141634363">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="483" height="412" key="javadoc.popup.new/0.0.1366.728@0.0.1366.728" timestamp="1587115379800" />
+    <state width="656" height="412" key="javadoc.popup.new/0.0.1366.728@0.0.1366.728" timestamp="1587141634363" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1587059909059">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1587059909059" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/RouteEditorController.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/data/RouteImpl.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

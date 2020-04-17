@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--fx:controller="fxml.DriverDocuments"-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_CENTER" spacing="10.0"
+         type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <VBox>
+        <TextField fx:id="txtRefSeries" promptText="серия"/>
+        <TextField fx:id="txtRefNumber" promptText="номер"/>
+        <DatePicker fx:id="dtRefStart" promptText="дата начала"/>
+    </VBox>
+    <HBox alignment="CENTER_RIGHT">
+        <Button fx:id="btnRefApply" mnemonicParsing="false" text="применить"/>
+        <Button fx:id="btnRefDelete" layoutX="654.0" layoutY="10.0" mnemonicParsing="false"
+                text="удалить"/>
+    </HBox>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+    </padding>
+</fx:root>

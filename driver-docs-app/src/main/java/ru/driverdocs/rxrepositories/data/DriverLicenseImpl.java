@@ -10,7 +10,6 @@ public final class DriverLicenseImpl implements DriverLicense {
     private final String number;
     private final LocalDate startdate;
     private final LocalDate enddate;
-
     private DriverLicenseImpl(Builder builder) {
         id = builder.id;
         series = builder.series;

@@ -241,8 +241,6 @@ public class DriverDocumentsController extends AbstractController {
         btnLicApply.disableProperty().bind(cmbDrivers.valueProperty().isNull());
         btnRefApply.disableProperty().bind(cmbDrivers.valueProperty().isNull());
         btnLicDelete.disableProperty().bind(currLicense.idProperty().isEqualTo(0));
-        btnRefDelete.disableProperty().bind(currReference.idProperty().isEqualTo(0));
-
 
         currLicense.seriesProperty().bindBidirectional(txtLicSeries.textProperty());
         currLicense.numberProperty().bindBidirectional(txtLicNumber.textProperty());
@@ -257,5 +255,7 @@ public class DriverDocumentsController extends AbstractController {
         currReference.startdateProperty().bindBidirectional(dtRefStart.valueProperty());
         btnRefApply.setOnAction(referenceApplyAction);
         btnRefDelete.setOnAction(referenceDeleteAction);
+
+        btnRefDelete.disableProperty().bind(currReference.idProperty().isEqualTo(0));
     }
 }

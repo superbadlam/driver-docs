@@ -2,6 +2,7 @@ package ru.driverdocs.ui.data;
 
 import javafx.beans.property.*;
 import ru.driverdocs.domain.MedicalReference;
+import ru.driverdocs.ui.validator.MedicalRefValidator;
 
 import java.time.LocalDate;
 
@@ -10,6 +11,32 @@ public class MedicalReferenceImpl implements MedicalReference {
     private StringProperty number = new SimpleStringProperty();
     private StringProperty series = new SimpleStringProperty();
     private LongProperty id = new SimpleLongProperty();
+    private final BooleanProperty invalid = new SimpleBooleanProperty();
+
+    public MedicalReferenceImpl() {
+        setInvalid(true);
+        number.addListener((observable, oldValue, newValue)
+                -> setInvalid(isInvalid(newValue, series.get(), startdate.get())));
+        series.addListener((observable, oldValue, newValue)
+                -> setInvalid(isInvalid(number.get(), newValue, startdate.get())));
+        startdate.addListener((observable, oldValue, newValue)
+                -> setInvalid(isInvalid(number.get(), series.get(), newValue)));
+
+    }
+
+    private boolean isInvalid(String number, String series, LocalDate startdate) {
+        return !MedicalRefValidator.isValidNumber(number)
+                || !MedicalRefValidator.isValidSeries(series)
+                || !MedicalRefValidator.isValidDateRange(startdate);
+    }
+
+    public BooleanProperty invalidProperty() {
+        return invalid;
+    }
+
+    private void setInvalid(boolean valid) {
+        this.invalid.set(valid);
+    }
 
     @Override
     public LocalDate getStartdate() {
