@@ -75,8 +75,8 @@ public final class EmployerImpl implements Employer {
         }
 
         public EmployerImpl build() {
-            if (id <= 0)
-                throw new IllegalArgumentException("id не может принимать значения меньше единицы");
+            if (id < 0)
+                throw new IllegalArgumentException("id не может принимать значения меньше нуля");
             if (inn == null || inn.trim().isEmpty())
                 throw new IllegalArgumentException("инн не может отсутствовать");
             if (ogrn == null || ogrn.trim().isEmpty())

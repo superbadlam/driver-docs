@@ -4,6 +4,7 @@ plugins {
 
 //compileJava.options.encoding='windows-1251'
 compileJava.options.encoding='UTF-8'
+compileTestJava.options.encoding = "UTF-8"
 
 group 'ru.driver-docs'
 
