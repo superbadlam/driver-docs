@@ -21,7 +21,7 @@ import java.util.Date;
 public final class MainController extends AbstractController {
 
     public static final String FXML_MAIN_VIEW = "/fxml/MainWnd.fxml";
-    private static Logger log = LoggerFactory.getLogger(MainController.class);
+    private static final Logger log = LoggerFactory.getLogger(MainController.class);
     private final ErrorInformer2 errorInformer = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
     //    private App app;
     @FXML
@@ -33,7 +33,7 @@ public final class MainController extends AbstractController {
     @FXML
     private Tab tabDrivers;
     @FXML
-    private Tab tabDriverCard;
+    private Tab tabEmployers;
     @FXML
     private Tab tabReports;
     @FXML
@@ -41,10 +41,9 @@ public final class MainController extends AbstractController {
     @FXML
     private TabPane tabPane;
 
-
-    private DriverDocumentsController driverDocumentsController;
     private DriverEditorController driverController;
     private RouteEditorController routeController;
+    private EmployerEditiorController employerController;
 
     private MainController() {
         super();
@@ -67,16 +66,28 @@ public final class MainController extends AbstractController {
 
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((observableValue, oldTab, newTab) -> {
-            if (newTab == tabDriverCard) {
-                showDriverDocumentsTab();
-            } else if (newTab == tabDrivers) {
+            if (newTab == tabDrivers) {
                 showDriverEditorTab();
             } else if (newTab == tabRoutes) {
                 showRouteEditorTab();
+            } else if (newTab == tabEmployers) {
+                showEmployerEditorTab();
             }
         });
 
         tabPane.getSelectionModel().select(tabRoutes);
+    }
+
+    private void showEmployerEditorTab() {
+        try {
+            if (employerController == null) {
+                employerController = EmployerEditiorController.build();
+                tabEmployers.setContent(employerController.getRootPane());
+            }
+        } catch (IOException e) {
+            log.warn("не удалось отобразить UI для редактирования предпринимателей", e);
+            errorInformer.displayError("не удалось отобразить UI для редактирования предпринимателей", e);
+        }
     }
 
     private void showRouteEditorTab() {
@@ -100,20 +111,6 @@ public final class MainController extends AbstractController {
         } catch (IOException e) {
             log.warn("не удалось отобразить UI для редактирования водителей", e);
             errorInformer.displayError("не удалось отобразить UI для редактирования водителей", e);
-        }
-    }
-
-    private void showDriverDocumentsTab() {
-        try {
-            if (driverDocumentsController == null) {
-                driverDocumentsController = DriverDocumentsController.build();
-                tabDriverCard.setContent(driverDocumentsController.getRootPane());
-            } else {
-                driverDocumentsController.refresh();
-            }
-        } catch (IOException e) {
-            log.warn("не удалось отобразить UI для редактирования док-ов водителя", e);
-            errorInformer.displayError("не удалось отобразить UI для редактирования док-ов водителя", e);
         }
     }
 }

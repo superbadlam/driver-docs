@@ -3,9 +3,7 @@ package ru.driverdocs.ui;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -19,9 +17,10 @@ import ru.driverdocs.ui.data.DriverImpl;
 import ru.driverdocs.ui.data.MedicalReferenceImpl;
 import ru.driverdocs.ui.validator.MedicalRefValidator;
 
-import java.io.IOException;
+import static ru.driverdocs.ui.ControlUtils.load;
+import static ru.driverdocs.ui.ControlUtils.whenFocusLost;
 
-public class DriverMedicalReferenceControl extends VBox {
+public final class DriverMedicalReferenceControl extends VBox {
     private static final String FXML_FILE = "/fxml/DriverMedicalReferenceControl.fxml";
     private static final Logger log = LoggerFactory.getLogger(DriverMedicalReferenceControl.class);
     private final MedicalRefRepository medicalRefRepository =
@@ -29,9 +28,9 @@ public class DriverMedicalReferenceControl extends VBox {
     private final SimpleObjectProperty<DriverImpl> currDriver =
             new SimpleObjectProperty<>();
     private final MedicalReferenceImpl currReference = new MedicalReferenceImpl();
-    private final ErrorInformer2 errorInformer
-            = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
     private final MedicalRefValidator validator = new MedicalRefValidator();
+    private final ErrorInformer2 errorInformer =
+            new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
     @FXML
     private TextField txtRefSeries;
     @FXML
@@ -43,19 +42,12 @@ public class DriverMedicalReferenceControl extends VBox {
     @FXML
     private Button btnRefDelete;
 
-    public DriverMedicalReferenceControl() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML_FILE));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
 
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+    public DriverMedicalReferenceControl() {
+        load(this, FXML_FILE);
     }
 
-    private void clearControl() {
+    protected void clearControl() {
         currReference.setId(0);
         currReference.setSeries("");
         currReference.setNumber("");
@@ -76,12 +68,6 @@ public class DriverMedicalReferenceControl extends VBox {
         }
     }
 
-    private void whenFocusLost(Control control, ValidatePerformer validatePerformer) {
-        control.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue)
-                validatePerformer.perform();
-        });
-    }
 
     public SimpleObjectProperty<DriverImpl> driverProperty() {
         return currDriver;

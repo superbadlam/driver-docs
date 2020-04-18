@@ -29,12 +29,13 @@ public final class EmployerLicenseRepositoryImpl implements EmployerLicenseRepos
     @Override
     public Single<Long> create(long employerId, String series, String number, LocalDate startdate) {
 
-        log.trace("выполним создание предпринимательской лицензии: driverId={}, series={}, number={}, startdate={}",
+        log.trace("выполним создание предпринимательской лицензии: employerId={}, series={}, number={}, startdate={}",
                 employerId, series, number, startdate);
 
         java.sql.Date sdate = toSqlDate(startdate);
         return
-                db.update("insert into dd.driver_license(driver_id, license_series,license_number,startdate) " +
+                db.update("insert " +
+                        "into dd.employer_license(employer_id, license_series,license_number,startdate) " +
                         "values(?,?,?,?)")
                         .parameterListStream(Flowable.just(Arrays.asList(employerId, series, number, sdate)))
                         .returnGeneratedKeys()
@@ -62,15 +63,17 @@ public final class EmployerLicenseRepositoryImpl implements EmployerLicenseRepos
     public Single<EmployerLicense> findByEmployerId(long employerId) {
 
         return
-                db.select("select keyid, license_series,license_number,startdate from dd.employer_license where employer_id=?")
+                db.select("select keyid, license_series,license_number,startdate " +
+                        "from dd.employer_license " +
+                        "where employer_id=?")
                         .parameter(employerId)
                         .getAs(Long.class, String.class, String.class, Date.class)
                         .doOnError(e -> log.warn(String.format("не удалось получитьпредпринимательскую лицензию: employer-id=%d", employerId), e))
-                        .map(row -> buildDriverLicense(row.value1(), row.value2(), row.value3(), row.value4()))
+                        .map(row -> buildLicense(row.value1(), row.value2(), row.value3(), row.value4()))
                         .singleOrError();
     }
 
-    private EmployerLicense buildDriverLicense(Long id, String series, String number, Date start) {
+    private EmployerLicense buildLicense(Long id, String series, String number, Date start) {
         return EmployerLicenseImpl.createOf(id, series, number, date2LocalDate(start));
     }
 
@@ -82,7 +85,9 @@ public final class EmployerLicenseRepositoryImpl implements EmployerLicenseRepos
 
         java.sql.Date sdate = toSqlDate(startdate);
         return
-                db.update("update dd.employer_license set license_series=?, license_number=?, startdate=? where keyid=?")
+                db.update("update dd.employer_license " +
+                        "set license_series=?, license_number=?, startdate=? " +
+                        "where keyid=?")
                         .parameterListStream(Flowable.just(Arrays.asList(series, number, sdate, id)))
                         .complete()
                         .doOnError(e ->

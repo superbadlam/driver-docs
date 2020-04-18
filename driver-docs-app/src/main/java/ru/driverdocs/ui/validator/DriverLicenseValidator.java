@@ -26,7 +26,8 @@ public class DriverLicenseValidator {
                 && enddate.isAfter(startdate) // начало старше конца
                 && EXPIRY_YEARS == (ChronoUnit.YEARS.between(startdate, enddate)) // разница ровно 10 лет
                 && startdate.isBefore(LocalDate.now().plusDays(1)) // начало не может быть больше текущей даты
-                && ChronoUnit.DAYS.between(startdate, LocalDate.now()) <= (ChronoUnit.DAYS.between(startdate, enddate));
+                && ChronoUnit.DAYS.between(startdate, LocalDate.now()) <=
+                (ChronoUnit.DAYS.between(startdate, enddate));
     }
 
     public boolean isValid(String number, String series, LocalDate startdate, LocalDate enddate) {

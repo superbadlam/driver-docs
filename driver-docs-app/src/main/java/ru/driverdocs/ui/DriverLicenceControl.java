@@ -3,9 +3,7 @@ package ru.driverdocs.ui;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -19,10 +17,12 @@ import ru.driverdocs.ui.data.DriverImpl;
 import ru.driverdocs.ui.data.DriverLicenseImpl;
 import ru.driverdocs.ui.validator.DriverLicenseValidator;
 
-import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class DriverLicenceControl extends VBox {
+import static ru.driverdocs.ui.ControlUtils.load;
+import static ru.driverdocs.ui.ControlUtils.whenFocusLost;
+
+public final class DriverLicenceControl extends VBox {
     private static final String FXML_FILE = "/fxml/DriverLicenceControl.fxml";
     private static final Logger log = LoggerFactory.getLogger(DriverLicenceControl.class);
     private final DriverLicenseRepository driverLicenseRepository
@@ -30,9 +30,9 @@ public class DriverLicenceControl extends VBox {
     private final SimpleObjectProperty<DriverImpl> currDriver
             = new SimpleObjectProperty<>();
     private final DriverLicenseImpl currLicense = new DriverLicenseImpl();
-    private final ErrorInformer2 errorInformer
-            = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
     private final DriverLicenseValidator validator = new DriverLicenseValidator();
+    private final ErrorInformer2 errorInformer =
+            new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
 
     @FXML
     private TextField txtLicSeries;
@@ -48,22 +48,14 @@ public class DriverLicenceControl extends VBox {
     private Button btnLicDelete;
 
     public DriverLicenceControl() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML_FILE));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        load(this, FXML_FILE);
     }
 
     public SimpleObjectProperty<DriverImpl> driverProperty() {
         return currDriver;
     }
 
-    private void clearControl() {
+    protected void clearControl() {
         currLicense.setId(0);
         currLicense.setSeries("");
         currLicense.setNumber("");
@@ -141,13 +133,6 @@ public class DriverLicenceControl extends VBox {
                     currLicense.getStartdate(), currLicense.getEnddate()).blockingAwait();
             log.info("обновили вод. удостоверение: driver={}, license={}", currDriver.get(), currLicense.toString());
         }
-    }
-
-    private void whenFocusLost(Control control, ValidatePerformer validatePerformer) {
-        control.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue)
-                validatePerformer.perform();
-        });
     }
 
     private void validateDateRange() {

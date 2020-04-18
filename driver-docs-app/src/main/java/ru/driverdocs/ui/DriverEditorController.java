@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class DriverEditorController extends AbstractController {
+public final class DriverEditorController extends AbstractController {
 
     private static final Logger log = LoggerFactory.getLogger(DriverEditorController.class);
     private static final String FXML_FILE = "/fxml/DriverEditorView.fxml";
@@ -51,6 +51,9 @@ public class DriverEditorController extends AbstractController {
     private DriverLicenceControl licenceControl;
     @FXML
     private DriverMedicalReferenceControl referenceControl;
+
+    private DriverEditorController() {
+    }
 
     public static DriverEditorController build() throws IOException {
         DriverEditorController c = new DriverEditorController();

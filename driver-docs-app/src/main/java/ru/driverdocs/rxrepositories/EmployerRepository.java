@@ -19,4 +19,6 @@ public interface EmployerRepository {
     Completable updateOgrn(long id, String ogrn);
 
     Completable updateAddress(long key, String address);
+
+    Completable update(long id, String name, String inn, String ogrn, String address);
 }

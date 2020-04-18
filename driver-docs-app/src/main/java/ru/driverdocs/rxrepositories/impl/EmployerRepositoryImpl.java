@@ -132,4 +132,23 @@ public class EmployerRepositoryImpl implements EmployerRepository {
                                                 "не удалось обновить адрес предпринимателя: id=%d, new-address=%s", key, address), e)
                         );
     }
+
+    @Override
+    public Completable update(long id, String name, String inn, String ogrn, String address) {
+
+        log.trace("выполним обновление employer's info: id={}, name={}, inn={}, ogrn={}, address={}",
+                id, name, inn, ogrn, address);
+
+        return
+                db.update("update dd.employer set name=?, inn=?, ogrn=?, address=? where keyid=?")
+                        .parameterListStream(Flowable.just(Arrays.asList(name, inn, ogrn, address, id)))
+                        .complete()
+                        .doOnError(e ->
+                                log.warn(
+                                        String.format(
+                                                "не удалось обновить employer's info: " +
+                                                        "id=%d, new-name=%s, new-inn=%s, new-ogrn=%s, new-address=%s",
+                                                id, name, inn, ogrn, address), e)
+                        );
+    }
 }

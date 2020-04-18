@@ -1,6 +1,6 @@
 package ru.driverdocs.ui;
 
 @FunctionalInterface
-public interface ValidatePerformer {
+public interface Performer {
     void perform();
 }

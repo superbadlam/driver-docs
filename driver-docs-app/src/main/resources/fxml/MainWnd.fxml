@@ -40,7 +40,7 @@
     <center>
         <TabPane fx:id="tabPane" side="LEFT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <Tab fx:id="tabDrivers" closable="false" text="Водители"/>
-            <Tab fx:id="tabDriverCard" closable="false" text="Карта водителя"/>
+            <Tab fx:id="tabEmployers" closable="false" text="Предприниматель"/>
             <Tab fx:id="tabRoutes" closable="false" text="Маршруты"/>
             <Tab fx:id="tabReports" closable="false" text="Отчеты"/>
         </TabPane>
