@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--fx:controller="fxml.DriverDocuments"-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_CENTER" spacing="10.0" type="javafx.scene.layout.VBox"
+         xmlns="http://javafx.com/javafx/10.0.2-internal">
+
+    <VBox spacing="10.0">
+        <TextField fx:id="txtPlateNo" promptText="гос. номер"/>
+        <TextField fx:id="txtMarka" promptText="марка"/>
+        <TextField fx:id="txtModel" promptText="модель"/>
+        <TextField fx:id="txtSeats" promptText="кол-во мест"/>
+        <TextField fx:id="txtPassportSeries" promptText="серия ПТС"/>
+        <TextField fx:id="txtPassportNumber" promptText="номер ПТС"/>
+        <TextField fx:id="txtCertificateSeries" promptText="серия свидетельства"/>
+        <TextField fx:id="txtCertificateNumber" promptText="номер свидетельства"/>
+        <HBox alignment="CENTER_RIGHT">
+            <Button fx:id="btnTransportApply" mnemonicParsing="false" text="применить"/>
+        </HBox>
+        <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        </VBox.margin>
+    </VBox>
+
+</fx:root>

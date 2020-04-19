@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1" type="BorderPane" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <center>
+
+        <TableView fx:id="tblTransports" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="colPlateNo" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="гос. номер"/>
+                <TableColumn fx:id="colMarka" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="марка"/>
+                <TableColumn fx:id="colModel" text="модель"/>
+                <TableColumn fx:id="colSeats" text="места"/>
+                <TableColumn fx:id="colPassportSeries" text="серия ПТС"/>
+                <TableColumn fx:id="colPassportNumber" text="номер ПТС"/>
+                <TableColumn fx:id="colCertificateSeries" text="серия свидетельства "/>
+                <TableColumn fx:id="colCertificateNumber" text="свидетельство No"/>
+                <TableColumn fx:id="colDelete" text="удалить"/>
+            </columns>
+        </TableView>
+    </center>
+</fx:root>

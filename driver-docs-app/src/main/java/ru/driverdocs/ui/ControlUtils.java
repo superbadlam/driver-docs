@@ -2,13 +2,15 @@ package ru.driverdocs.ui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Control;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.function.Predicate;
 
 public class ControlUtils {
 
-    public static <C extends VBox> void load(C control, String fxmlFile) {
+    public static <C extends Pane> void load(C control, String fxmlFile) {
         FXMLLoader fxmlLoader = new FXMLLoader(control.getClass().getResource(fxmlFile));
         fxmlLoader.setRoot(control);
         fxmlLoader.setController(control);
@@ -32,5 +34,15 @@ public class ControlUtils {
             if (newValue)
                 performer.perform();
         });
+    }
+
+    public static void highlightOnWhen(TextField textField, Predicate<String> predicate) {
+        if (predicate.test(textField.getText())) {
+            textField.setStyle("-fx-control-inner-background: red");
+        }
+    }
+
+    public static void highlightOff(TextField textField) {
+        textField.setStyle("-fx-control-inner-background: white");
     }
 }

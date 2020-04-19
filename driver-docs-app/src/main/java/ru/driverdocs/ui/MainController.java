@@ -35,15 +35,19 @@ public final class MainController extends AbstractController {
     @FXML
     private Tab tabEmployers;
     @FXML
+    private Tab tabTransport;
+    @FXML
     private Tab tabReports;
     @FXML
     private Tab tabRoutes;
     @FXML
     private TabPane tabPane;
 
+
     private DriverEditorController driverController;
     private RouteEditorController routeController;
     private EmployerEditiorController employerController;
+    private TransportEditiorController transportController;
 
     private MainController() {
         super();
@@ -72,10 +76,24 @@ public final class MainController extends AbstractController {
                 showRouteEditorTab();
             } else if (newTab == tabEmployers) {
                 showEmployerEditorTab();
+            } else if (newTab == tabTransport) {
+                showTransportEditorTab();
             }
         });
 
         tabPane.getSelectionModel().select(tabRoutes);
+    }
+
+    private void showTransportEditorTab() {
+        try {
+            if (transportController == null) {
+                transportController = TransportEditiorController.build();
+                tabTransport.setContent(transportController.getRootPane());
+            }
+        } catch (IOException e) {
+            log.warn("не удалось отобразить UI для редактирования транспорта", e);
+            errorInformer.displayError("не удалось отобразить UI для редактирования транспорта", e);
+        }
     }
 
     private void showEmployerEditorTab() {

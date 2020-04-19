@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--fx:controller="fxml.DriverDocuments"-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import ru.driverdocs.ui.TransportInputsControl?>
+<?import ru.driverdocs.ui.TransportTableControl?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.2-internal">
+    <top>
+        <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+            <Label text="укажите предпринимателя">
+                <HBox.margin>
+                    <Insets right="15.0"/>
+                </HBox.margin>
+            </Label>
+            <ComboBox fx:id="cmbEmployers" prefWidth="350.0"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.75">
+            <TransportTableControl fx:id="tableControl"/>
+            <TransportInputsControl fx:id="inputsControl"/>
+        </SplitPane>
+    </center>
+</BorderPane>
