@@ -18,10 +18,8 @@ import ru.driverdocs.ui.validator.EmployerValidator;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.function.Predicate;
 
-import static ru.driverdocs.ui.ControlUtils.whenFocusLost;
-import static ru.driverdocs.ui.ControlUtils.whenFocusSet;
+import static ru.driverdocs.ui.ControlUtils.*;
 
 public final class EmployerEditiorController extends AbstractController {
     private static final Logger log = LoggerFactory.getLogger(EmployerEditiorController.class);
@@ -190,13 +188,13 @@ public final class EmployerEditiorController extends AbstractController {
         btnApply.disableProperty().bind(newEmployer.invalidProperty());
     }
 
-    private void highlightOnWhen(TextField textField, Predicate<String> predicate) {
-        if (predicate.test(textField.getText())) {
-            textField.setStyle("-fx-control-inner-background: red");
-        }
-    }
-
-    private void highlightOff(TextField textField) {
-        textField.setStyle("-fx-control-inner-background: white");
-    }
+//    private void highlightOnWhen(TextField textField, Predicate<String> predicate) {
+//        if (predicate.test(textField.getText())) {
+//            textField.setStyle("-fx-control-inner-background: red");
+//        }
+//    }
+//
+//    private void highlightOff(TextField textField) {
+//        textField.setStyle("-fx-control-inner-background: white");
+//    }
 }
