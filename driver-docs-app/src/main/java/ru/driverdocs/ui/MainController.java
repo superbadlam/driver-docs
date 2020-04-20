@@ -47,7 +47,7 @@ public final class MainController extends AbstractController {
     private DriverEditorController driverController;
     private RouteEditorController routeController;
     private EmployerEditiorController employerController;
-    private TransportEditiorController transportController;
+    private TransportEditorController transportController;
 
     private MainController() {
         super();
@@ -87,7 +87,7 @@ public final class MainController extends AbstractController {
     private void showTransportEditorTab() {
         try {
             if (transportController == null) {
-                transportController = TransportEditiorController.build();
+                transportController = TransportEditorController.build();
                 tabTransport.setContent(transportController.getRootPane());
             }
         } catch (IOException e) {

@@ -18,7 +18,7 @@ import ru.driverdocs.ui.validator.TransportValidator;
 
 import java.util.function.Consumer;
 
-import static ru.driverdocs.ui.ControlUtils.load;
+import static ru.driverdocs.ui.ControlUtils.*;
 
 public class TransportInputsControl extends VBox {
     private static final String FXML_FILE = "/fxml/TransportInputsControl.fxml";
@@ -82,6 +82,28 @@ public class TransportInputsControl extends VBox {
 //        txtPassportNumber.disableProperty().bind(initialTransportProperty.isNull());
 //        txtCertificateSeries.disableProperty().bind(initialTransportProperty.isNull());
 //        txtCertificateNumber.disableProperty().bind(initialTransportProperty.isNull());
+
+
+        whenFocusLost(txtPlateNo, () -> highlightOnWhen(txtPlateNo, s -> !validator.isValidPlateNo(s)));
+        whenFocusSet(txtPlateNo, () -> highlightOff(txtPlateNo));
+
+        whenFocusLost(txtMarka, () -> highlightOnWhen(txtMarka, s -> !validator.isValidMarka(s)));
+        whenFocusSet(txtMarka, () -> highlightOff(txtMarka));
+
+        whenFocusLost(txtModel, () -> highlightOnWhen(txtModel, s -> !validator.isValidModel(s)));
+        whenFocusSet(txtModel, () -> highlightOff(txtModel));
+
+        whenFocusLost(txtPassportSeries, () -> highlightOnWhen(txtPassportSeries, s -> !validator.isValidPassportSeries(s)));
+        whenFocusSet(txtPassportSeries, () -> highlightOff(txtPassportSeries));
+
+        whenFocusLost(txtPassportNumber, () -> highlightOnWhen(txtPassportNumber, s -> !validator.isValidPassportNumber(s)));
+        whenFocusSet(txtPassportNumber, () -> highlightOff(txtPassportNumber));
+
+        whenFocusLost(txtCertificateSeries, () -> highlightOnWhen(txtCertificateSeries, s -> !validator.isValidCertificateSeries(s)));
+        whenFocusSet(txtCertificateSeries, () -> highlightOff(txtCertificateSeries));
+
+        whenFocusLost(txtCertificateNumber, () -> highlightOnWhen(txtCertificateNumber, s -> !validator.isValidCertificateNumber(s)));
+        whenFocusSet(txtCertificateNumber, () -> highlightOff(txtCertificateNumber));
 
         initialTransportProperty.addListener((observable, oldValue, newValue) -> transport.copyState(newValue));
 

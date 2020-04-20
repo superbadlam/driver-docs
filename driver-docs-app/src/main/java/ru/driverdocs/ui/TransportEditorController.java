@@ -2,11 +2,8 @@ package ru.driverdocs.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.driverdocs.DriverDocsSetting;
 import ru.driverdocs.helpers.ui.AbstractController;
-import ru.driverdocs.helpers.ui.ErrorInformer2;
 import ru.driverdocs.rxrepositories.EmployerRepository;
 import ru.driverdocs.rxrepositories.TransportRepository;
 import ru.driverdocs.ui.data.EmployerImpl;
@@ -14,13 +11,11 @@ import ru.driverdocs.ui.data.TransportImpl;
 
 import java.io.IOException;
 
-public final class TransportEditiorController extends AbstractController {
-    private static final Logger log = LoggerFactory.getLogger(TransportEditiorController.class);
+public final class TransportEditorController extends AbstractController {
     private static final String FXML_FILE = "/fxml/TransportEditorView.fxml";
     private final EmployerRepository employerRepository = DriverDocsSetting.getInstance().getEmployerRepository();
     private final TransportRepository transportRepository
             = DriverDocsSetting.getInstance().getTransportRepository();
-    private final ErrorInformer2 errorInformer = new ErrorInformer2(DriverDocsSetting.getInstance().getCssUrl());
 
     @FXML
     private ComboBox<EmployerImpl> cmbEmployers;
@@ -30,11 +25,11 @@ public final class TransportEditiorController extends AbstractController {
     private TransportInputsControl inputsControl;
 
 
-    private TransportEditiorController() {
+    private TransportEditorController() {
     }
 
-    public static TransportEditiorController build() throws IOException {
-        TransportEditiorController c = new TransportEditiorController();
+    public static TransportEditorController build() throws IOException {
+        TransportEditorController c = new TransportEditorController();
         c.load(FXML_FILE);
         return c;
     }
@@ -69,6 +64,10 @@ public final class TransportEditiorController extends AbstractController {
     }
 
     private void insertTransport(TransportImpl transport) {
+
+        if (cmbEmployers.getValue() == null)
+            throw new RuntimeException("Не указан предприниматель. Не возможно вставить новую запись о транспорте.");
+
         transport.setId(
                 transportRepository.create(cmbEmployers.getValue().getId(),
                         transport.getPlateNo(),
