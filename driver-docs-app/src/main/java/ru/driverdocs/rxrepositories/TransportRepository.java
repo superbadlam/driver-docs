@@ -36,4 +36,8 @@ public interface TransportRepository {
     Completable updateCertificateSeries(long id, String certificateSeries);
 
     Completable updateCertificateNumber(long id, String certificateNumber);
+
+    Completable update(long id, String plateNo, String marka, String model, int seats,
+                       String passportSeries, String passportNumber,
+                       String certificateSeries, String certificateNumber);
 }

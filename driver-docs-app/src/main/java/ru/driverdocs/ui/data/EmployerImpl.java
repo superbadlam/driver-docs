@@ -128,4 +128,9 @@ public final class EmployerImpl implements Employer {
     public StringProperty addressProperty() {
         return address;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

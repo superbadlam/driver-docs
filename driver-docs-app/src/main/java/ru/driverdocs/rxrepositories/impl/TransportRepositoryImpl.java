@@ -119,9 +119,11 @@ public final class TransportRepositoryImpl implements TransportRepository {
                         "passport_series," +
                         "passport_number," +
                         "certificate_series," +
-                        "certificate_number" +
+                        "certificate_number," +
+                        "keyid" +
                         " from dd.car" +
                         " where employer_id=?")
+                        .parameter(employerId)
                         .get(rs -> (Transport) new TransportImpl.Builder()
                                 .setPlateNo(rs.getString(1))
                                 .setMarka(rs.getString(2))
@@ -131,10 +133,50 @@ public final class TransportRepositoryImpl implements TransportRepository {
                                 .setPassportNumber(rs.getString(6))
                                 .setCertificateSeries(rs.getString(7))
                                 .setCertificateNumber(rs.getString(8))
+                                .setId(rs.getLong(9))
                                 .build())
                         .doOnError(ex -> log.warn(
                                 String.format("не удалось найти транспорт по employerId: employerId=%s", employerId)
                                 , ex));
+    }
+
+    @Override
+    public Completable update(long id, String plateNo, String marka, String model, int seats,
+                              String passportSeries, String passportNumber,
+                              String certificateSeries, String certificateNumber) {
+
+        log.trace("update transport: id={}," +
+                        "plateNo={}," + "marka={}," + "model={}," + "seats={}," +
+                        "passportSeries={}," + "passportNumber={}," +
+                        "certificateSeries={}," + "certificateNumber={}",
+                id, plateNo, marka, model, seats, passportSeries, passportNumber, certificateSeries, certificateNumber);
+        return
+                db.update("update dd.car set " +
+                        "plate_no=?, " +
+                        "marka=?, " +
+                        "model=?, " +
+                        "seats=?, " +
+                        "passport_series=?, " +
+                        "passport_number=?, " +
+                        "certificate_series=?, " +
+                        "certificate_number=? " +
+                        "where keyid=? ")
+                        .parameterListStream(
+                                Flowable.just(Arrays.asList(
+                                        plateNo, marka, model, seats,
+                                        passportSeries, passportNumber,
+                                        certificateSeries, certificateNumber, id)))
+                        .complete()
+                        .doOnError(e ->
+                                log.warn(
+                                        String.format("error updating transport: id=%d," +
+                                                        "plateNo=%s," + "marka=%s," + "model=%s," + "seats=%d," +
+                                                        "passportSeries=%s," + "passportNumber=%s," +
+                                                        "certificateSeries=%s," + "certificateNumber=%s",
+                                                id, plateNo, marka, model, seats,
+                                                passportSeries, passportNumber, certificateSeries, certificateNumber), e)
+                        );
+
     }
 
     @Override

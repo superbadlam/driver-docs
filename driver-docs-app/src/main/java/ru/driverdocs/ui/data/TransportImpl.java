@@ -9,7 +9,7 @@ public final class TransportImpl implements Transport {
     private final StringProperty plateNo = new SimpleStringProperty();
     private final StringProperty marka = new SimpleStringProperty();
     private final StringProperty model = new SimpleStringProperty();
-    private final IntegerProperty seats = new SimpleIntegerProperty();
+    private final ObjectProperty<Integer> seats = new SimpleObjectProperty<>();
     private final StringProperty passportSeries = new SimpleStringProperty();
     private final StringProperty passportNumber = new SimpleStringProperty();
     private final StringProperty certificateSeries = new SimpleStringProperty();
@@ -20,11 +20,12 @@ public final class TransportImpl implements Transport {
 
     public TransportImpl() {
         setInvalid(true);
+
         plateNo.addListener((observable, oldValue, newValue)
                 -> setInvalid(isInvalid(newValue, marka.get(), model.get(), seats.get(),
                 passportSeries.get(), passportNumber.get(), certificateSeries.get(), certificateNumber.get())));
 
-        plateNo.addListener((observable, oldValue, newValue)
+        model.addListener((observable, oldValue, newValue)
                 -> setInvalid(isInvalid(plateNo.get(), newValue, model.get(), seats.get(),
                 passportSeries.get(), passportNumber.get(), certificateSeries.get(), certificateNumber.get())));
 
@@ -33,7 +34,7 @@ public final class TransportImpl implements Transport {
                 passportSeries.get(), passportNumber.get(), certificateSeries.get(), certificateNumber.get())));
 
         seats.addListener((observable, oldValue, newValue)
-                -> setInvalid(isInvalid(plateNo.get(), marka.get(), model.get(), newValue.intValue(),
+                -> setInvalid(isInvalid(plateNo.get(), marka.get(), model.get(), newValue,
                 passportSeries.get(), passportNumber.get(), certificateSeries.get(), certificateNumber.get())));
 
         passportSeries.addListener((observable, oldValue, newValue)
@@ -70,10 +71,9 @@ public final class TransportImpl implements Transport {
         return newTransport;
     }
 
-    public boolean isInvalid(String plateNo, String marka, String model, int seats,
+    public boolean isInvalid(String plateNo, String marka, String model, Integer seats,
                              String passportSeries, String passportNumber,
                              String certificateSeries, String certificateNumber) {
-
         return !validator.isValid(plateNo, marka, model, seats,
                 passportSeries, passportNumber,
                 certificateSeries, certificateNumber);
@@ -92,15 +92,19 @@ public final class TransportImpl implements Transport {
     }
 
     public void copyState(Transport transport) {
-        setCertificateNumber(transport.getCertificateNumber());
-        setCertificateSeries(transport.getCertificateSeries());
-        setMarka(transport.getMarka());
-        setModel(transport.getModel());
-        setPassportNumber(transport.getPassportNumber());
-        setPassportSeries(transport.getPassportSeries());
-        setPlateNo(transport.getPlateNo());
-        setSeats(transport.getSeats());
-        setId(transport.getId());
+        if (transport == null) {
+            resetState();
+        } else {
+            setCertificateNumber(transport.getCertificateNumber());
+            setCertificateSeries(transport.getCertificateSeries());
+            setMarka(transport.getMarka());
+            setModel(transport.getModel());
+            setPassportNumber(transport.getPassportNumber());
+            setPassportSeries(transport.getPassportSeries());
+            setPlateNo(transport.getPlateNo());
+            setSeats(transport.getSeats());
+            setId(transport.getId());
+        }
     }
 
 
@@ -108,8 +112,8 @@ public final class TransportImpl implements Transport {
         return invalid;
     }
 
-    private void setInvalid(boolean valid) {
-        this.invalid.set(valid);
+    private void setInvalid(boolean invalid) {
+        this.invalid.set(invalid);
     }
 
     @Override
@@ -173,7 +177,7 @@ public final class TransportImpl implements Transport {
         this.seats.set(seats);
     }
 
-    public IntegerProperty seatsProperty() {
+    public ObjectProperty<Integer> seatsProperty() {
         return seats;
     }
 
@@ -227,5 +231,22 @@ public final class TransportImpl implements Transport {
 
     public StringProperty certificateNumberProperty() {
         return certificateNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "TransportImpl{" +
+                "id=" + id +
+                ", plateNo=" + plateNo +
+                ", marka=" + marka +
+                ", model=" + model +
+                ", seats=" + seats +
+                ", passportSeries=" + passportSeries +
+                ", passportNumber=" + passportNumber +
+                ", certificateSeries=" + certificateSeries +
+                ", certificateNumber=" + certificateNumber +
+                ", validator=" + validator +
+                ", invalid=" + invalid +
+                '}';
     }
 }

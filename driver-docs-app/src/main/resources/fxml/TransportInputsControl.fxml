@@ -12,7 +12,7 @@
         <TextField fx:id="txtPlateNo" promptText="гос. номер"/>
         <TextField fx:id="txtMarka" promptText="марка"/>
         <TextField fx:id="txtModel" promptText="модель"/>
-        <TextField fx:id="txtSeats" promptText="кол-во мест"/>
+        <Spinner fx:id="spinnerSeats"/>
         <TextField fx:id="txtPassportSeries" promptText="серия ПТС"/>
         <TextField fx:id="txtPassportNumber" promptText="номер ПТС"/>
         <TextField fx:id="txtCertificateSeries" promptText="серия свидетельства"/>

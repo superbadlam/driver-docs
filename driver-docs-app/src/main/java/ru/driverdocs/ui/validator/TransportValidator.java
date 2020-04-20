@@ -13,8 +13,8 @@ public class TransportValidator {
         return model != null && !model.trim().equals("");
     }
 
-    public boolean isValidSeats(int seats) {
-        return seats > 0;
+    public boolean isValidSeats(Integer seats) {
+        return seats != null && seats >= 0;
     }
 
     public boolean isValidPassportSeries(String series) {
@@ -33,7 +33,7 @@ public class TransportValidator {
         return number != null && !number.trim().equals("");
     }
 
-    public boolean isValid(String plateNo, String marka, String model, int seats,
+    public boolean isValid(String plateNo, String marka, String model, Integer seats,
                            String passportSeries, String passportNumber,
                            String certificateSeries, String certificateNumber) {
         return isValidPlateNo(plateNo)
