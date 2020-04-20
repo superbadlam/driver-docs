@@ -112,7 +112,8 @@ public class TransportTableControl extends BorderPane {
     }
 
     public void updateItem(TransportImpl newValue) {
-        editTransportProperty.get().copyState(newValue);
+        if (editTransportProperty.get() != null)
+            editTransportProperty.get().copyState(newValue);
         editTransportProperty.set(null);
     }
 }

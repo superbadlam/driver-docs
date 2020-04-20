@@ -7,9 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a55bd92e-7ee1-4afc-84ae-e9f917c83816" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/TransportEditiorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/TransportEditorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/TransportInputsControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/TransportInputsControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/TransportTableControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/driver-docs-app/src/main/java/ru/driverdocs/ui/TransportTableControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587392051736</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="refactoring TRANSPORT editing functionality">
+      <created>1587393301012</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1587393301012</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -404,34 +409,34 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="381" y="214" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1587392332049" />
-    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2" timestamp="1587392050440">
+    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2" timestamp="1587393299644">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587392050440" />
+    <state x="11" y="0" width="1337" height="699" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587393299644" />
     <state width="438" height="438" key="DebuggerActiveHint" timestamp="1587385921627">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="438" height="438" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1587385921627" />
-    <state x="129" y="49" key="DiffContextDialog" timestamp="1587050449385">
+    <state x="129" y="49" key="DiffContextDialog" timestamp="1587393294333">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="49" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587050449385" />
-    <state width="1322" height="337" key="GridCell.Tab.0.bottom" timestamp="1587393051367">
+    <state x="129" y="49" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587393294333" />
+    <state width="1322" height="336" key="GridCell.Tab.0.bottom" timestamp="1587393260322">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="337" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587393051367" />
-    <state width="1322" height="337" key="GridCell.Tab.0.center" timestamp="1587393051367">
+    <state width="1322" height="336" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587393260322" />
+    <state width="1322" height="336" key="GridCell.Tab.0.center" timestamp="1587393260322">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="337" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587393051367" />
-    <state width="1322" height="337" key="GridCell.Tab.0.left" timestamp="1587393051367">
+    <state width="1322" height="336" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587393260322" />
+    <state width="1322" height="336" key="GridCell.Tab.0.left" timestamp="1587393260322">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="337" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587393051367" />
-    <state width="1322" height="337" key="GridCell.Tab.0.right" timestamp="1587393051367">
+    <state width="1322" height="336" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587393260322" />
+    <state width="1322" height="336" key="GridCell.Tab.0.right" timestamp="1587393260322">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="337" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587393051367" />
+    <state width="1322" height="336" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587393260322" />
     <state width="1322" height="407" key="GridCell.Tab.1.bottom" timestamp="1587389675759">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
