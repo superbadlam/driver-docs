@@ -122,14 +122,14 @@ public class TransportInputsControl extends VBox {
 
     private void onApplyClick(ActionEvent actionEvent) {
         if (transport.getId() == 0) {
-            insertTransport();
+            insertTransport(transport);
         } else {
-            updateTransport();
+            updateTransport(transport);
         }
         transport.resetState();
     }
 
-    private void updateTransport() {
+    private void updateTransport(TransportImpl transport) {
         try {
             log.trace("выполним обновление транспорта: {}", transport);
             onUpdateTransport.accept(transport);
@@ -139,7 +139,7 @@ public class TransportInputsControl extends VBox {
         }
     }
 
-    private void insertTransport() {
+    private void insertTransport(TransportImpl transport) {
         try {
             log.trace("выполним создание нового транспорта: {}", transport);
             onInsertTransport.accept(transport);

@@ -41,8 +41,9 @@ public final class TransportEditorController extends AbstractController {
 
         cmbEmployers.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> tableControl.setItems(
-                        transportRepository.findByEmployerId(
-                                newValue.getId()).map(TransportImpl::createOf).toList().blockingGet()));
+                        transportRepository
+                                .findByEmployerId(newValue.getId())
+                                .toList().blockingGet()));
 
         tableControl.setOnDeleteTransport(this::deleteTransport);
         inputsControl.initialTransportProperty().bind(tableControl.editTransportProperty());

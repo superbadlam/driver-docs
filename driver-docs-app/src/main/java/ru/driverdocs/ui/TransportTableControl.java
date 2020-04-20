@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.driverdocs.DriverDocsSetting;
+import ru.driverdocs.domain.Transport;
 import ru.driverdocs.helpers.ui.ActionColumn;
 import ru.driverdocs.helpers.ui.ErrorInformer2;
 import ru.driverdocs.ui.data.TransportImpl;
@@ -102,16 +103,19 @@ public class TransportTableControl extends BorderPane {
         });
     }
 
-    public void setItems(Collection<TransportImpl> collection) {
+    public void setItems(Collection<Transport> collection) {
         tblTransports.getItems().clear();
-        tblTransports.getItems().addAll(collection);
+        collection.stream()
+                .map(TransportImpl::createOf)
+                .forEach(t -> tblTransports.getItems().add(t));
+
     }
 
-    public void addItem(TransportImpl transport) {
-        tblTransports.getItems().add(transport);
+    public void addItem(Transport transport) {
+        tblTransports.getItems().add(TransportImpl.createOf(transport));
     }
 
-    public void updateItem(TransportImpl newValue) {
+    public void updateItem(Transport newValue) {
         if (editTransportProperty.get() != null)
             editTransportProperty.get().copyState(newValue);
         editTransportProperty.set(null);
